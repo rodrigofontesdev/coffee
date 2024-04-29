@@ -1,3 +1,10 @@
+import { BrowserRouter } from 'react-router-dom'
+import { Router } from './Router'
+
 export default function App() {
-  return <h1>Olá Mundo</h1>
+  return (
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
+  )
 }
