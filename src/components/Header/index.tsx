@@ -2,7 +2,7 @@ import { MapPin, ShoppingCart } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
 import { Actions, Cart, CartItems, HeaderContainer, Location } from './styles'
 
-import logoImg from '../../../public/images/logo.svg'
+import logoImg from '../../assets/images/logo.svg'
 
 export function Header() {
     return (
