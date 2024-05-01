@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-export const HeaderContainer = styled.header`
-    width: 100%;
+export const Container = styled.header`
+    max-width: calc(70rem + 4.5rem);
     display: flex;
     justify-content: space-between;
     align-items: center;
     column-gap: 0.75rem;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding: 2rem 2.25rem;
+    margin-right: auto;
+    margin-left: auto;
 `
 
 export const Actions = styled.div`
