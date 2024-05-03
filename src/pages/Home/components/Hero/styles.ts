@@ -4,13 +4,26 @@ import backgroundImg from '../../../../assets/images/hero-background.svg'
 
 export const ContainerFluid = styled.section`
     width: 100%;
+    position: relative;
     background-image: url(${backgroundImg});
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-size: contain;
+    background-repeat: repeat-x;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(80px);
+    }
 `
 
 export const Wrapper = styled.div`
     max-width: calc(70rem + 4.5rem);
+    position: relative;
     display: flex;
     flex-direction: row;
     padding: 5.625rem 2.25rem;
