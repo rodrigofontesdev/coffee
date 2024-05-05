@@ -6,18 +6,19 @@ export const InputGroup = styled.div`
     align-items: center;
     flex-wrap: nowrap;
     column-gap: 0.25rem;
+    max-width: 5.75rem;
     background-color: ${(props) => props.theme['gray-300']};
     padding: 0.5rem;
     border-radius: 6px;
 
     input {
-        width: 100%;
+        min-width: 1px;
         min-height: 22px;
+        flex: 1;
         background-color: transparent;
         color: ${(props) => props.theme['gray-900']};
         font-size: 1rem;
         font-weight: 400;
-        line-height: 1.375;
         text-align: center;
     }
 `
