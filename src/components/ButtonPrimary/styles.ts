@@ -4,6 +4,7 @@ export const Button = styled.button<{ $fill?: boolean }>`
     display: flex;
     column-gap: 0.25rem;
     justify-content: center;
+    align-items: center;
     width: ${(props) => (props.$fill ? '100%' : 'auto')};
     background-color: ${(props) => props.theme['yellow-500']};
     color: ${(props) => props.theme.white};
