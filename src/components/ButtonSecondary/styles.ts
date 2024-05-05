@@ -4,12 +4,12 @@ export const Button = styled.button`
     display: flex;
     column-gap: 0.25rem;
     justify-content: center;
+    align-items: center;
     background-color: ${(props) => props.theme['gray-300']};
     color: ${(props) => props.theme['gray-700']};
     font-size: 0.75rem;
     font-weight: 400;
     text-transform: uppercase;
-    line-height: 1.6;
     padding: 0.5rem;
     border-radius: 6px;
     transition: background 300ms ease-in-out;
