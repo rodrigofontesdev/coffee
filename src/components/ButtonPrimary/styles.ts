@@ -1,10 +1,14 @@
 import styled from 'styled-components'
 
-export const Button = styled.button<{ $fill?: boolean }>`
+interface ButtonProps {
+    $fill?: boolean
+}
+
+export const Button = styled.button<ButtonProps>`
     display: flex;
-    column-gap: 0.25rem;
     justify-content: center;
     align-items: center;
+    column-gap: 0.25rem;
     width: ${(props) => (props.$fill ? '100%' : 'auto')};
     background-color: ${(props) => props.theme['yellow-500']};
     color: ${(props) => props.theme.white};

@@ -1,11 +1,15 @@
-import { ReactNode } from 'react'
+import { ButtonHTMLAttributes, ReactNode } from 'react'
 import { Button } from './styles'
 
-interface ButtonPrimaryProps {
+interface ButtonPrimaryProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode
     fill?: boolean
 }
 
-export function ButtonPrimary({ children, fill }: ButtonPrimaryProps) {
-    return <Button $fill={fill}>{children}</Button>
+export function ButtonPrimary({ children, fill, ...rest }: ButtonPrimaryProps) {
+    return (
+        <Button $fill={fill} {...rest}>
+            {children}
+        </Button>
+    )
 }
