@@ -1,10 +1,10 @@
-import { ReactNode } from 'react'
+import { ButtonHTMLAttributes, ReactNode } from 'react'
 import { Button } from './styles'
 
-interface ButtonIconProps {
+interface ButtonIconProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode
 }
 
-export function ButtonIcon({ children }: ButtonIconProps) {
-    return <Button>{children}</Button>
+export function ButtonIcon({ children, ...rest }: ButtonIconProps) {
+    return <Button {...rest}>{children}</Button>
 }

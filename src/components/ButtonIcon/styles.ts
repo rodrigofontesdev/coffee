@@ -2,9 +2,9 @@ import styled from 'styled-components'
 
 export const Button = styled.button`
     display: flex;
-    column-gap: 0.5rem;
     justify-content: center;
     align-items: center;
+    column-gap: 0.5rem;
     background-color: ${(props) => props.theme['purple-900']};
     padding: 0.5rem;
     border-radius: 6px;
