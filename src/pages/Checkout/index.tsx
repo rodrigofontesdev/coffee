@@ -15,7 +15,6 @@ import {
     Delivery,
     InputControl,
     InputGroup,
-    InputLabel,
     PaymentMethods,
     ProductActions,
     ProductCardSimple,
@@ -45,9 +44,6 @@ export function Checkout() {
 
                             <AddressFormFields>
                                 <InputGroup $cols={5}>
-                                    <InputLabel htmlFor="zipcode" $srOnly>
-                                        CEP
-                                    </InputLabel>
                                     <InputControl
                                         type="tel"
                                         name="zipcode"
@@ -58,9 +54,6 @@ export function Checkout() {
                                 </InputGroup>
 
                                 <InputGroup $cols={12}>
-                                    <InputLabel htmlFor="street" $srOnly>
-                                        Rua
-                                    </InputLabel>
                                     <InputControl
                                         type="text"
                                         name="street"
@@ -71,9 +64,6 @@ export function Checkout() {
                                 </InputGroup>
 
                                 <InputGroup $cols={5}>
-                                    <InputLabel htmlFor="streetNumber" $srOnly>
-                                        Número
-                                    </InputLabel>
                                     <InputControl
                                         type="text"
                                         name="streetNumber"
@@ -84,9 +74,6 @@ export function Checkout() {
                                 </InputGroup>
 
                                 <InputGroup $cols={7}>
-                                    <InputLabel htmlFor="complement" $srOnly>
-                                        Complemento
-                                    </InputLabel>
                                     <InputControl
                                         type="text"
                                         name="complement"
@@ -97,9 +84,6 @@ export function Checkout() {
                                 </InputGroup>
 
                                 <InputGroup $cols={5}>
-                                    <InputLabel htmlFor="neighborhood" $srOnly>
-                                        Bairro
-                                    </InputLabel>
                                     <InputControl
                                         type="text"
                                         name="neighborhood"
@@ -110,9 +94,6 @@ export function Checkout() {
                                 </InputGroup>
 
                                 <InputGroup $cols={5}>
-                                    <InputLabel htmlFor="city" $srOnly>
-                                        Cidade
-                                    </InputLabel>
                                     <InputControl
                                         type="text"
                                         name="city"
@@ -123,9 +104,6 @@ export function Checkout() {
                                 </InputGroup>
 
                                 <InputGroup $cols={2}>
-                                    <InputLabel htmlFor="state" $srOnly>
-                                        UF
-                                    </InputLabel>
                                     <InputControl
                                         type="text"
                                         name="state"

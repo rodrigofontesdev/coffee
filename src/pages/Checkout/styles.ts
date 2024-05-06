@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const Container = styled.section`
     max-width: calc(70rem + 4.5rem);
@@ -92,28 +92,6 @@ export const InputGroup = styled.div<{ $cols?: number }>`
     flex-direction: column;
     ${(props) => props.$cols && `grid-column: span ${props.$cols};`}
     position: relative;
-`
-
-export const InputLabel = styled.label<{ $srOnly?: boolean }>`
-    ${(props) => {
-        if (props.$srOnly) {
-            return css`
-                width: 1px;
-                height: 1px;
-                position: absolute;
-                padding: 0;
-                margin: -1px;
-                border-width: 0;
-                clip: rect(0, 0, 0, 0);
-                white-space: nowrap;
-                overflow: hidden;
-            `
-        } else {
-            return css`
-                font-size: 0.875rem;
-            `
-        }
-    }}
 `
 
 export const InputControl = styled.input`
