@@ -1,27 +1,27 @@
 import { MapPin, ShoppingCart } from '@phosphor-icons/react'
 import { Link } from 'react-router-dom'
-import { Actions, Cart, CartItems, Container, Location } from './styles'
+import { Actions, Cart, CartItems, HeaderContainer, Location } from './styles'
 
 import logoImg from '../../assets/images/logo.svg'
 
 export function Header() {
     return (
-        <Container>
+        <HeaderContainer>
             <Link to="/">
-                <img src={logoImg} alt="Coffee Delivery" />
+                <img src={logoImg} alt="" />
             </Link>
 
             <Actions>
                 <Location>
                     <MapPin size={22} weight="fill" />
-                    Ribeirão Pires, SP
+                    <span>Ribeirão Pires, SP</span>
                 </Location>
 
-                <Cart to="/checkout" role="button">
+                <Cart to="/checkout">
                     <ShoppingCart size={22} weight="fill" />
                     <CartItems>3</CartItems>
                 </Cart>
             </Actions>
-        </Container>
+        </HeaderContainer>
     )
 }
