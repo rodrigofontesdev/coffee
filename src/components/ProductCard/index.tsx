@@ -1,50 +1,39 @@
 import { ShoppingCartSimple } from '@phosphor-icons/react'
 import { ButtonIcon } from '../ButtonIcon'
 import { InputNumber } from '../Forms/InputNumber'
-import {
-    Amount,
-    Buy,
-    Container,
-    Heading,
-    Price,
-    Quantity,
-    Subtitle,
-    Tag,
-    Tags,
-    Title,
-} from './styles'
+import { Buy, Heading, Price, ProductContainer, Quantity, Tags } from './styles'
 
 import productImg from '../../assets/images/products/expresso-tradicional.png'
 
 export function ProductCard() {
-    return (
-        <Container>
-            <img src={productImg} alt="Expresso Tradicional" />
+  return (
+    <ProductContainer>
+      <img src={productImg} alt="Expresso Tradicional" />
 
-            <Tags>
-                <Tag>Especial</Tag>
-                <Tag>Alcoólico</Tag>
-                <Tag>Gelado</Tag>
-            </Tags>
+      <Tags>
+        <li>Especial</li>
+        <li>Alcoólico</li>
+        <li>Gelado</li>
+      </Tags>
 
-            <Heading>
-                <Title>Expresso Tradicional</Title>
-                <Subtitle>O tradicional café feito com água quente e grãos moídos</Subtitle>
-            </Heading>
+      <Heading>
+        <h3>Expresso Tradicional</h3>
+        <p>O tradicional café feito com água quente e grãos moídos</p>
+      </Heading>
 
-            <Buy>
-                <Price>
-                    R$ <Amount>9,90</Amount>
-                </Price>
+      <Buy>
+        <Price>
+          R$ <span>9,90</span>
+        </Price>
 
-                <Quantity>
-                    <InputNumber />
-                </Quantity>
+        <Quantity>
+          <InputNumber />
+        </Quantity>
 
-                <ButtonIcon>
-                    <ShoppingCartSimple size={22} weight="fill" />
-                </ButtonIcon>
-            </Buy>
-        </Container>
-    )
+        <ButtonIcon>
+          <ShoppingCartSimple size={22} weight="fill" />
+        </ButtonIcon>
+      </Buy>
+    </ProductContainer>
+  )
 }

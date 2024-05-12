@@ -6,10 +6,10 @@ import { GlobalStyle } from './styles/global'
 import { defaultTheme } from './styles/themes/default'
 
 export default function App() {
-    return (
-        <ThemeProvider theme={defaultTheme}>
-            <RouterProvider router={router} />
-            <GlobalStyle />
-        </ThemeProvider>
-    )
+  return (
+    <ThemeProvider theme={defaultTheme}>
+      <RouterProvider router={router} />
+      <GlobalStyle />
+    </ThemeProvider>
+  )
 }

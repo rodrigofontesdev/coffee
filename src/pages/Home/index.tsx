@@ -3,34 +3,34 @@ import { Hero } from './components/Hero'
 import { Catalog, Items, Heading } from './styles'
 
 export function Home() {
-    return (
-        <main>
-            <Hero />
+  return (
+    <main>
+      <Hero />
 
-            <Catalog>
-                <Heading>
-                    <h1>Nossos cafés</h1>
+      <Catalog>
+        <Heading>
+          <h1>Nossos cafés</h1>
 
-                    <ul>
-                        <li>Tradicional</li>
-                        <li>Especial</li>
-                        <li>Com leite</li>
-                        <li>Alcoólico</li>
-                        <li>Gelado</li>
-                    </ul>
-                </Heading>
+          <ul>
+            <li>Tradicional</li>
+            <li>Especial</li>
+            <li>Com leite</li>
+            <li>Alcoólico</li>
+            <li>Gelado</li>
+          </ul>
+        </Heading>
 
-                <Items>
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
-                </Items>
-            </Catalog>
-        </main>
-    )
+        <Items>
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+          <ProductCard />
+        </Items>
+      </Catalog>
+    </main>
+  )
 }
