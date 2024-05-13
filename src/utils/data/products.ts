@@ -113,8 +113,10 @@ const PRODUCTS = [
   },
 ]
 
+const TAGS = ['tradicional', 'especial', 'com leite', 'alcoólico', 'gelado']
+
 const productsByTag = (tag: string) => PRODUCTS.filter((product) => product.tags.includes(tag))
 
 export type ProductProps = (typeof PRODUCTS)[0]
 
-export { PRODUCTS, productsByTag }
+export { PRODUCTS, TAGS, productsByTag }
