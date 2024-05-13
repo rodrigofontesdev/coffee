@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Catalog = styled.section`
   max-width: calc(70rem + 4.5rem);
@@ -22,30 +22,41 @@ export const Heading = styled.header`
     font-weight: 800;
     line-height: 1.3;
   }
+`
 
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+export const Tags = styled.ul`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+`
 
-    li {
-      list-style: none;
-      color: ${(props) => props.theme['yellow-800']};
-      font-size: 0.625rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      padding: 0.375rem 0.75rem;
-      border: 1px solid ${(props) => props.theme['yellow-500']};
-      border-radius: 1rem;
-      cursor: pointer;
-      transition: all 300ms ease-in-out;
+interface TagItemProps {
+  $isActive?: boolean
+}
 
-      &:hover {
-        background-color: ${(props) => props.theme['yellow-500']};
-        color: ${(props) => props.theme['white']};
-      }
-    }
+export const TagItem = styled.li<TagItemProps>`
+  list-style: none;
+  color: ${(props) => props.theme['yellow-800']};
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.375rem 0.75rem;
+  border: 1px solid ${(props) => props.theme['yellow-500']};
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 300ms ease-in-out;
+
+  &:hover {
+    background-color: ${(props) => props.theme['yellow-500']};
+    color: ${(props) => props.theme['white']};
   }
+
+  ${(props) =>
+    props.$isActive &&
+    css`
+      background-color: ${(props) => props.theme['yellow-500']};
+      color: ${(props) => props.theme['white']};
+    `}
 `
 
 export const Items = styled.div`

@@ -1,29 +1,33 @@
 import { ShoppingCartSimple } from '@phosphor-icons/react'
+import { ProductProps } from '../../utils/data/products'
+import { format } from '../../utils/functions/formatter'
 import { ButtonIcon } from '../ButtonIcon'
 import { InputNumber } from '../Forms/InputNumber'
 import { Buy, Heading, Price, ProductContainer, Quantity, Tags } from './styles'
 
-import productImg from '../../assets/images/products/expresso-tradicional.png'
+interface ProductCardProps {
+  product: ProductProps
+}
 
-export function ProductCard() {
+export function ProductCard({ product }: ProductCardProps) {
   return (
     <ProductContainer>
-      <img src={productImg} alt="Expresso Tradicional" />
+      <img src={product.image} alt={product.title} />
 
       <Tags>
-        <li>Especial</li>
-        <li>Alcoólico</li>
-        <li>Gelado</li>
+        {product.tags.map((tag) => {
+          return <li key={tag}>{tag}</li>
+        })}
       </Tags>
 
       <Heading>
-        <h3>Expresso Tradicional</h3>
-        <p>O tradicional café feito com água quente e grãos moídos</p>
+        <h3>{product.title}</h3>
+        <p>{product.description}</p>
       </Heading>
 
       <Buy>
         <Price>
-          R$ <span>9,90</span>
+          R$ <span>{format.price(product.price)}</span>
         </Price>
 
         <Quantity>
