@@ -1,18 +1,40 @@
 import { Minus, Plus } from '@phosphor-icons/react'
-import { ButtonMinus, ButtonPlus, InputGroup } from './styles'
+import { ChangeEvent, useState } from 'react'
+import { DecrementButton, IncrementButton, InputGroup } from './styles'
 
 export function InputNumber() {
+  const [quantity, setQuantity] = useState(1)
+  const isDecrementButtonDisabled = quantity === 1
+
+  function handleInputQuantity(value: number) {
+    const newQuantity = Math.max(quantity + value, 1)
+
+    setQuantity(newQuantity)
+  }
+
+  function handleInputQuantityOnChange(e: ChangeEvent<HTMLInputElement>) {
+    const newQuantity = Number(e.target.value)
+
+    if (newQuantity > 0) {
+      setQuantity(newQuantity)
+    }
+  }
+
   return (
     <InputGroup>
-      <ButtonMinus type="button">
+      <DecrementButton
+        type="button"
+        onClick={() => handleInputQuantity(-1)}
+        disabled={isDecrementButtonDisabled}
+      >
         <Minus size={14} weight="bold" />
-      </ButtonMinus>
+      </DecrementButton>
 
-      <input type="tel" defaultValue={1} pattern="[0-9]+" />
+      <input type="tel" pattern="[0-9]+" value={quantity} onChange={handleInputQuantityOnChange} />
 
-      <ButtonPlus type="button">
-        <Plus size={16} weight="bold" />
-      </ButtonPlus>
+      <IncrementButton type="button" onClick={() => handleInputQuantity(1)}>
+        <Plus size={14} weight="bold" />
+      </IncrementButton>
     </InputGroup>
   )
 }

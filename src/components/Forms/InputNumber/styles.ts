@@ -34,11 +34,11 @@ const Button = styled.button`
     fill: ${(props) => props.theme['purple-700']};
   }
 
-  &:hover svg {
+  &:not(:disabled):hover svg {
     fill: ${(props) => props.theme['purple-900']};
   }
 `
 
-export const ButtonMinus = styled(Button)``
+export const DecrementButton = styled(Button)``
 
-export const ButtonPlus = styled(Button)``
+export const IncrementButton = styled(Button)``
