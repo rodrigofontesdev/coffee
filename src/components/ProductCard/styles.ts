@@ -59,11 +59,11 @@ export const Heading = styled.header`
 `
 
 export const Buy = styled.div`
+  width: 100%;
   display: flex;
+  justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
-  flex: 1;
-  column-gap: 0.5rem;
 `
 
 export const Price = styled.span`
@@ -79,10 +79,15 @@ export const Price = styled.span`
     font-weight: 800;
     line-height: 1.3;
     padding-left: 0.25rem;
-    padding-right: 1rem;
   }
 `
 
-export const Quantity = styled.div`
-  max-width: 4.5rem;
+export const AddToCart = styled.div`
+  display: flex;
+  column-gap: 0.5rem;
+
+  > div {
+    width: 4.5rem;
+    max-width: 100%;
+  }
 `

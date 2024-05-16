@@ -11,10 +11,8 @@ export const InputGroup = styled.div`
   padding: 0.5rem;
   border-radius: 6px;
 
-  input {
+  span {
     flex: 1;
-    min-width: 1px;
-    min-height: 22px;
     background-color: transparent;
     color: ${(props) => props.theme['gray-900']};
     font-size: 1rem;
