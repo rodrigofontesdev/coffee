@@ -1,5 +1,6 @@
 import { ShoppingCartSimple } from '@phosphor-icons/react'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { CartContext } from '../../contexts/CartContext'
 import { ProductProps } from '../../utils/data/products'
 import { format } from '../../utils/functions/formatter'
 import { ButtonIcon } from '../ButtonIcon'
@@ -10,7 +11,14 @@ interface ProductCardProps {
   product: ProductProps
 }
 
+interface ItemProps {
+  productId: number
+  price: number
+  quantity: number
+}
+
 export function ProductCard({ product }: ProductCardProps) {
+  const { addToCart } = useContext(CartContext)
   const [quantity, setQuantity] = useState(1)
 
   function handleIncrementQuantity() {
@@ -21,6 +29,10 @@ export function ProductCard({ product }: ProductCardProps) {
     if (quantity > 1) {
       setQuantity((state) => state - 1)
     }
+  }
+
+  function handleAddItemToCart(item: ItemProps) {
+    addToCart(item)
   }
 
   return (
@@ -51,7 +63,15 @@ export function ProductCard({ product }: ProductCardProps) {
             decrementQuantity={handleDecrementQuantity}
           />
 
-          <ButtonIcon>
+          <ButtonIcon
+            onClick={() =>
+              handleAddItemToCart({
+                productId: product.id,
+                price: product.price,
+                quantity,
+              })
+            }
+          >
             <ShoppingCartSimple size={22} weight="fill" />
           </ButtonIcon>
         </AddToCart>
