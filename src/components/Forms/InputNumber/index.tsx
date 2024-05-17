@@ -3,8 +3,8 @@ import { DecrementButton, IncrementButton, InputGroup } from './styles'
 
 interface InputNumberProps {
   quantity: number
-  disableIncrementButton: boolean
-  disableDecrementButton: boolean
+  disableIncrementButton?: boolean
+  disableDecrementButton?: boolean
   incrementQuantity: () => void
   decrementQuantity: () => void
 }
