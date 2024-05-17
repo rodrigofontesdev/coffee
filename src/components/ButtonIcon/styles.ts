@@ -1,18 +1,44 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const Button = styled.button`
+interface ButtonProps {
+  $variant?: 'purple' | 'yellow'
+}
+
+export const Button = styled.button<ButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
   column-gap: 0.5rem;
-  background-color: ${(props) => props.theme['purple-900']};
   padding: 0.5rem;
   border-radius: 6px;
   transition: background 300ms ease-in-out;
 
-  &:hover {
-    background-color: ${(props) => props.theme['purple-700']};
+  &:disabled {
+    cursor: not-allowed;
   }
+
+  ${(props) => {
+    switch (props.$variant) {
+      case 'yellow': {
+        return css`
+          background-color: ${(props) => props.theme['yellow-800']};
+
+          &:not(:disabled):hover {
+            background-color: ${(props) => props.theme['yellow-500']};
+          }
+        `
+      }
+      default: {
+        return css`
+          background-color: ${(props) => props.theme['purple-900']};
+
+          &:not(:disabled):hover {
+            background-color: ${(props) => props.theme['purple-700']};
+          }
+        `
+      }
+    }
+  }}
 
   svg {
     fill: ${(props) => props.theme.white};
