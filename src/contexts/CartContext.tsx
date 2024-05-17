@@ -1,8 +1,7 @@
 import { ReactNode, createContext, useState } from 'react'
+import { ProductProps } from '../utils/data/products'
 
-interface CartItemProps {
-  productId: number
-  price: number
+interface CartItemProps extends Pick<ProductProps, 'id' | 'title' | 'image' | 'price'> {
   quantity: number
 }
 
@@ -49,7 +48,7 @@ export function CartProvider({ children }: CartProviderProps) {
   }
 
   function checkProductExistsInCart(productId: number) {
-    const product = cart.findIndex((item) => item.productId === productId)
+    const product = cart.findIndex((item) => item.id === productId)
 
     return product >= 0
   }
