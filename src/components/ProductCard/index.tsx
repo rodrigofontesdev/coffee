@@ -1,4 +1,4 @@
-import { ShoppingCartSimple } from '@phosphor-icons/react'
+import { CheckFat, ShoppingCartSimple } from '@phosphor-icons/react'
 import { useContext, useState } from 'react'
 import { CartContext } from '../../contexts/CartContext'
 import { ProductProps } from '../../utils/data/products'
@@ -18,7 +18,7 @@ interface ItemProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const { addToCart } = useContext(CartContext)
+  const { addToCart, checkProductExistsInCart } = useContext(CartContext)
   const [quantity, setQuantity] = useState(1)
 
   function handleIncrementQuantity() {
@@ -33,6 +33,10 @@ export function ProductCard({ product }: ProductCardProps) {
 
   function handleAddItemToCart(item: ItemProps) {
     addToCart(item)
+  }
+
+  function isProductAddedToCart(productId: number) {
+    return checkProductExistsInCart(productId)
   }
 
   return (
@@ -58,22 +62,29 @@ export function ProductCard({ product }: ProductCardProps) {
         <AddToCart>
           <InputNumber
             quantity={quantity}
-            disableDecrementButton={quantity === 1}
+            disableIncrementButton={isProductAddedToCart(product.id)}
+            disableDecrementButton={quantity === 1 || isProductAddedToCart(product.id)}
             incrementQuantity={handleIncrementQuantity}
             decrementQuantity={handleDecrementQuantity}
           />
 
-          <ButtonIcon
-            onClick={() =>
-              handleAddItemToCart({
-                productId: product.id,
-                price: product.price,
-                quantity,
-              })
-            }
-          >
-            <ShoppingCartSimple size={22} weight="fill" />
-          </ButtonIcon>
+          {isProductAddedToCart(product.id) ? (
+            <ButtonIcon variant="yellow" disabled={true}>
+              <CheckFat size={22} weight="fill" />
+            </ButtonIcon>
+          ) : (
+            <ButtonIcon
+              onClick={() =>
+                handleAddItemToCart({
+                  productId: product.id,
+                  price: product.price,
+                  quantity,
+                })
+              }
+            >
+              <ShoppingCartSimple size={22} weight="fill" />
+            </ButtonIcon>
+          )}
         </AddToCart>
       </Buy>
     </ProductContainer>
