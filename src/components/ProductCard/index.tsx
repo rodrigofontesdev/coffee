@@ -11,15 +11,11 @@ interface ProductCardProps {
   product: ProductProps
 }
 
-interface ItemProps {
-  productId: number
-  price: number
-  quantity: number
-}
-
 export function ProductCard({ product }: ProductCardProps) {
   const { addToCart, checkProductExistsInCart } = useContext(CartContext)
   const [quantity, setQuantity] = useState(1)
+
+  const { id, title, description, image, tags, price } = product
 
   function handleIncrementQuantity() {
     setQuantity((state) => state + 1)
@@ -31,57 +27,55 @@ export function ProductCard({ product }: ProductCardProps) {
     }
   }
 
-  function handleAddItemToCart(item: ItemProps) {
-    addToCart(item)
+  function handleAddProductToCart() {
+    addToCart({
+      id,
+      title,
+      image,
+      price,
+      quantity,
+    })
   }
 
-  function isProductAddedToCart(productId: number) {
-    return checkProductExistsInCart(productId)
-  }
+  const isProductAddedToCart = checkProductExistsInCart(id)
+  const isIncrementButtonDisabled = isProductAddedToCart
+  const isDecrementButtonDisabled = isProductAddedToCart || quantity === 1
 
   return (
     <ProductContainer>
-      <img src={product.image} alt={product.title} />
+      <img src={image} alt={title} />
 
       <Tags>
-        {product.tags.map((tag) => {
+        {tags.map((tag) => {
           return <li key={tag}>{tag}</li>
         })}
       </Tags>
 
       <Heading>
-        <h3>{product.title}</h3>
-        <p>{product.description}</p>
+        <h3>{title}</h3>
+        <p>{description}</p>
       </Heading>
 
       <Buy>
         <Price>
-          R$ <span>{format.price(product.price)}</span>
+          R$ <span>{format.price(price)}</span>
         </Price>
 
         <AddToCart>
           <InputNumber
             quantity={quantity}
-            disableIncrementButton={isProductAddedToCart(product.id)}
-            disableDecrementButton={quantity === 1 || isProductAddedToCart(product.id)}
+            disableIncrementButton={isIncrementButtonDisabled}
+            disableDecrementButton={isDecrementButtonDisabled}
             incrementQuantity={handleIncrementQuantity}
             decrementQuantity={handleDecrementQuantity}
           />
 
-          {isProductAddedToCart(product.id) ? (
+          {isProductAddedToCart ? (
             <ButtonIcon variant="yellow" disabled={true}>
               <CheckFat size={22} weight="fill" />
             </ButtonIcon>
           ) : (
-            <ButtonIcon
-              onClick={() =>
-                handleAddItemToCart({
-                  productId: product.id,
-                  price: product.price,
-                  quantity,
-                })
-              }
-            >
+            <ButtonIcon onClick={handleAddProductToCart}>
               <ShoppingCartSimple size={22} weight="fill" />
             </ButtonIcon>
           )}
