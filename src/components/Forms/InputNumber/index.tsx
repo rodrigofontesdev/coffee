@@ -3,6 +3,7 @@ import { DecrementButton, IncrementButton, InputGroup } from './styles'
 
 interface InputNumberProps {
   quantity: number
+  disableIncrementButton: boolean
   disableDecrementButton: boolean
   incrementQuantity: () => void
   decrementQuantity: () => void
@@ -10,6 +11,7 @@ interface InputNumberProps {
 
 export function InputNumber({
   quantity,
+  disableIncrementButton,
   disableDecrementButton,
   incrementQuantity,
   decrementQuantity,
@@ -22,7 +24,7 @@ export function InputNumber({
 
       <span>{quantity}</span>
 
-      <IncrementButton type="button" onClick={incrementQuantity}>
+      <IncrementButton type="button" onClick={incrementQuantity} disabled={disableIncrementButton}>
         <Plus size={14} weight="bold" />
       </IncrementButton>
     </InputGroup>

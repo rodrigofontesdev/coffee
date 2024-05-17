@@ -28,6 +28,10 @@ const Button = styled.button`
   background-color: transparent;
   transition: fill 300ms ease-in-out;
 
+  &:disabled {
+    cursor: not-allowed;
+  }
+
   svg {
     fill: ${(props) => props.theme['purple-700']};
   }
