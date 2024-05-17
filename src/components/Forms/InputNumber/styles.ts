@@ -5,8 +5,9 @@ export const InputGroup = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: nowrap;
+  flex: 1;
   column-gap: 0.25rem;
-  max-width: 5.75rem;
+  max-width: 4.5rem;
   background-color: ${(props) => props.theme['gray-300']};
   padding: 0.5rem;
   border-radius: 6px;
