@@ -12,6 +12,7 @@ interface CartContextProps {
   addToCart: (product: CartItemProps) => void
   removeFromCart: (product: CartItemProps) => void
   updateCart: (product: CartItemProps) => void
+  checkProductExistsInCart: (productId: number) => boolean
 }
 
 interface CartProviderProps {
@@ -26,6 +27,7 @@ export function CartProvider({ children }: CartProviderProps) {
 
   function addToCart(product: CartItemProps) {
     setCart((state) => [product, ...state])
+    setCartItems((state) => state + 1)
   }
 
   function removeFromCart(product: CartItemProps) {
@@ -46,8 +48,16 @@ export function CartProvider({ children }: CartProviderProps) {
     setCart(updatedCart)
   }
 
+  function checkProductExistsInCart(productId: number) {
+    const product = cart.findIndex((item) => item.productId === productId)
+
+    return product >= 0
+  }
+
   return (
-    <CartContext.Provider value={{ cartItems, cart, addToCart, removeFromCart, updateCart }}>
+    <CartContext.Provider
+      value={{ cartItems, cart, addToCart, removeFromCart, updateCart, checkProductExistsInCart }}
+    >
       {children}
     </CartContext.Provider>
   )
