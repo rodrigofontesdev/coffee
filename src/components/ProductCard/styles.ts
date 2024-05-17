@@ -85,9 +85,5 @@ export const Price = styled.span`
 export const AddToCart = styled.div`
   display: flex;
   column-gap: 0.5rem;
-
-  > div {
-    width: 4.5rem;
-    max-width: 100%;
-  }
+  min-width: 7.5rem;
 `
