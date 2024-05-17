@@ -1,228 +1,164 @@
-import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money, Trash } from '@phosphor-icons/react'
+import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money } from '@phosphor-icons/react'
+import { useContext } from 'react'
 import { ButtonPrimary } from '../../components/ButtonPrimary'
-import { ButtonSecondary } from '../../components/ButtonSecondary'
-import { InputNumber } from '../../components/Forms/InputNumber'
+import { CartContext } from '../../contexts/CartContext'
+import { ProductCardSimple } from './components/ProductCardSimple'
 import {
-    Address,
-    AddressFormFields,
-    CartDetails,
-    CartSubtotal,
-    CheckControl,
-    CheckGroup,
-    CheckLabel,
-    CheckoutForm,
-    Container,
-    Delivery,
-    InputControl,
-    InputGroup,
-    PaymentMethods,
-    ProductActions,
-    ProductCardSimple,
-    ProductInfo,
-    ProductTitle,
-    Subtotal,
+  Address,
+  AddressFormFields,
+  CartDetails,
+  CartSubtotal,
+  CheckControl,
+  CheckGroup,
+  CheckLabel,
+  CheckoutForm,
+  Container,
+  Delivery,
+  InputControl,
+  InputGroup,
+  PaymentMethods,
+  Subtotal,
 } from './styles'
 
-import productImg from '../../assets/images/products/expresso-tradicional.png'
-
 export function Checkout() {
-    return (
-        <main>
-            <Container>
-                <CheckoutForm>
-                    <Delivery>
-                        <h2>Complete seu pedido</h2>
+  const { cart } = useContext(CartContext)
 
-                        <Address>
-                            <header>
-                                <MapPinLine size={22} />
-                                <div>
-                                    <h3>Endereço de Entrega</h3>
-                                    <p>Informe o endereço onde deseja receber seu pedido</p>
-                                </div>
-                            </header>
+  return (
+    <main>
+      <Container>
+        <CheckoutForm>
+          <Delivery>
+            <h2>Complete seu pedido</h2>
 
-                            <AddressFormFields>
-                                <InputGroup $cols={5}>
-                                    <InputControl
-                                        type="tel"
-                                        name="zipcode"
-                                        id="zipcode"
-                                        placeholder="CEP"
-                                        required
-                                    />
-                                </InputGroup>
+            <Address>
+              <header>
+                <MapPinLine size={22} />
 
-                                <InputGroup $cols={12}>
-                                    <InputControl
-                                        type="text"
-                                        name="street"
-                                        id="street"
-                                        placeholder="Rua"
-                                        required
-                                    />
-                                </InputGroup>
+                <div>
+                  <h3>Endereço de Entrega</h3>
+                  <p>Informe o endereço onde deseja receber seu pedido</p>
+                </div>
+              </header>
 
-                                <InputGroup $cols={5}>
-                                    <InputControl
-                                        type="text"
-                                        name="streetNumber"
-                                        id="streetNumber"
-                                        placeholder="Número"
-                                        required
-                                    />
-                                </InputGroup>
+              <AddressFormFields>
+                <InputGroup $cols={5}>
+                  <InputControl type="tel" name="zipcode" id="zipcode" placeholder="CEP" required />
+                </InputGroup>
 
-                                <InputGroup $cols={7}>
-                                    <InputControl
-                                        type="text"
-                                        name="complement"
-                                        id="complement"
-                                        placeholder="Complemento"
-                                    />
-                                    <span>Opcional</span>
-                                </InputGroup>
+                <InputGroup $cols={12}>
+                  <InputControl type="text" name="street" id="street" placeholder="Rua" required />
+                </InputGroup>
 
-                                <InputGroup $cols={5}>
-                                    <InputControl
-                                        type="text"
-                                        name="neighborhood"
-                                        id="neighborhood"
-                                        placeholder="Bairro"
-                                        required
-                                    />
-                                </InputGroup>
+                <InputGroup $cols={5}>
+                  <InputControl
+                    type="text"
+                    name="streetNumber"
+                    id="streetNumber"
+                    placeholder="Número"
+                    required
+                  />
+                </InputGroup>
 
-                                <InputGroup $cols={5}>
-                                    <InputControl
-                                        type="text"
-                                        name="city"
-                                        id="city"
-                                        placeholder="Cidade"
-                                        required
-                                    />
-                                </InputGroup>
+                <InputGroup $cols={7}>
+                  <InputControl
+                    type="text"
+                    name="complement"
+                    id="complement"
+                    placeholder="Complemento"
+                  />
+                  <span>Opcional</span>
+                </InputGroup>
 
-                                <InputGroup $cols={2}>
-                                    <InputControl
-                                        type="text"
-                                        name="state"
-                                        id="state"
-                                        placeholder="UF"
-                                        maxLength={2}
-                                        pattern="[a-z]+"
-                                        required
-                                    />
-                                </InputGroup>
-                            </AddressFormFields>
-                        </Address>
+                <InputGroup $cols={5}>
+                  <InputControl
+                    type="text"
+                    name="neighborhood"
+                    id="neighborhood"
+                    placeholder="Bairro"
+                    required
+                  />
+                </InputGroup>
 
-                        <PaymentMethods>
-                            <header>
-                                <CurrencyDollar size={22} />
-                                <div>
-                                    <h3>Pagamento</h3>
-                                    <p>
-                                        O pagamento é feito na entrega. Escolha a forma que deseja
-                                        pagar
-                                    </p>
-                                </div>
-                            </header>
+                <InputGroup $cols={5}>
+                  <InputControl type="text" name="city" id="city" placeholder="Cidade" required />
+                </InputGroup>
 
-                            <div>
-                                <CheckGroup>
-                                    <CheckControl
-                                        type="radio"
-                                        name="paymentMethod"
-                                        id="creditCard"
-                                    />
-                                    <CheckLabel htmlFor="creditCard">
-                                        <CreditCard size={16} />
-                                        Cartão de crédito
-                                    </CheckLabel>
-                                </CheckGroup>
+                <InputGroup $cols={2}>
+                  <InputControl
+                    type="text"
+                    name="state"
+                    id="state"
+                    placeholder="UF"
+                    maxLength={2}
+                    pattern="[a-z]+"
+                    required
+                  />
+                </InputGroup>
+              </AddressFormFields>
+            </Address>
 
-                                <CheckGroup>
-                                    <CheckControl
-                                        type="radio"
-                                        name="paymentMethod"
-                                        id="debitCard"
-                                    />
-                                    <CheckLabel htmlFor="debitCard">
-                                        <Bank size={16} />
-                                        Cartão de débito
-                                    </CheckLabel>
-                                </CheckGroup>
+            <PaymentMethods>
+              <header>
+                <CurrencyDollar size={22} />
 
-                                <CheckGroup>
-                                    <CheckControl type="radio" name="paymentMethod" id="inCash" />
-                                    <CheckLabel htmlFor="inCash">
-                                        <Money size={16} />
-                                        Dinheiro
-                                    </CheckLabel>
-                                </CheckGroup>
-                            </div>
-                        </PaymentMethods>
-                    </Delivery>
+                <div>
+                  <h3>Pagamento</h3>
+                  <p>O pagamento é feito na entrega. Escolha a forma que deseja pagar</p>
+                </div>
+              </header>
 
-                    <CartDetails>
-                        <h2>Cafés selecionados</h2>
+              <div>
+                <CheckGroup>
+                  <CheckControl type="radio" name="paymentMethod" id="creditCard" />
+                  <CheckLabel htmlFor="creditCard">
+                    <CreditCard size={16} />
+                    Cartão de crédito
+                  </CheckLabel>
+                </CheckGroup>
 
-                        <CartSubtotal>
-                            <ProductCardSimple>
-                                <img src={productImg} alt="Expresso Tradicional" />
+                <CheckGroup>
+                  <CheckControl type="radio" name="paymentMethod" id="debitCard" />
+                  <CheckLabel htmlFor="debitCard">
+                    <Bank size={16} />
+                    Cartão de débito
+                  </CheckLabel>
+                </CheckGroup>
 
-                                <ProductInfo>
-                                    <ProductTitle>
-                                        <h3>Expresso Tradicional</h3>
-                                        <span>R$ 9,90</span>
-                                    </ProductTitle>
+                <CheckGroup>
+                  <CheckControl type="radio" name="paymentMethod" id="inCash" />
+                  <CheckLabel htmlFor="inCash">
+                    <Money size={16} />
+                    Dinheiro
+                  </CheckLabel>
+                </CheckGroup>
+              </div>
+            </PaymentMethods>
+          </Delivery>
 
-                                    <ProductActions>
-                                        <InputNumber />
-                                        <ButtonSecondary>
-                                            <Trash size={16} />
-                                            Remover
-                                        </ButtonSecondary>
-                                    </ProductActions>
-                                </ProductInfo>
-                            </ProductCardSimple>
+          <CartDetails>
+            <h2>Cafés selecionados</h2>
 
-                            <ProductCardSimple>
-                                <img src={productImg} alt="Expresso Tradicional" />
+            <CartSubtotal>
+              {cart.map((product) => (
+                <ProductCardSimple key={product.id} product={product} />
+              ))}
 
-                                <ProductInfo>
-                                    <ProductTitle>
-                                        <h3>Expresso Tradicional</h3>
-                                        <span>R$ 9,90</span>
-                                    </ProductTitle>
+              <Subtotal>
+                <span>Total de itens</span>
+                <span>R$ 29,70</span>
 
-                                    <ProductActions>
-                                        <InputNumber />
-                                        <ButtonSecondary>
-                                            <Trash size={16} />
-                                            Remover
-                                        </ButtonSecondary>
-                                    </ProductActions>
-                                </ProductInfo>
-                            </ProductCardSimple>
+                <span>Entrega</span>
+                <span>R$ 3,50</span>
 
-                            <Subtotal>
-                                <span>Total de itens</span>
-                                <span>R$ 29,70</span>
+                <span>Total</span>
+                <span>R$ 33,20</span>
 
-                                <span>Entrega</span>
-                                <span>R$ 3,50</span>
-
-                                <span>Total</span>
-                                <span>R$ 33,20</span>
-
-                                <ButtonPrimary fill>Confirmar Pedido</ButtonPrimary>
-                            </Subtotal>
-                        </CartSubtotal>
-                    </CartDetails>
-                </CheckoutForm>
-            </Container>
-        </main>
-    )
+                <ButtonPrimary fill>Confirmar Pedido</ButtonPrimary>
+              </Subtotal>
+            </CartSubtotal>
+          </CartDetails>
+        </CheckoutForm>
+      </Container>
+    </main>
+  )
 }

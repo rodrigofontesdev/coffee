@@ -55,6 +55,7 @@ export const Actions = styled.div`
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
-  width: 70%;
+  width: 100%;
+  max-width: 12rem;
   height: 2rem;
 `
