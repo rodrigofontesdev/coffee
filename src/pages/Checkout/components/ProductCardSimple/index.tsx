@@ -1,7 +1,8 @@
 import { Trash } from '@phosphor-icons/react'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { ButtonSecondary } from '../../../../components/ButtonSecondary'
 import { InputNumber } from '../../../../components/Forms/InputNumber'
+import { CartContext } from '../../../../contexts/CartContext'
 import { ProductProps } from '../../../../utils/data/products'
 import { format } from '../../../../utils/functions/formatter'
 import { Actions, Details, Heading, ProductContainer } from './styles'
@@ -15,8 +16,9 @@ interface ProductCardSimpleProps {
 }
 
 export function ProductCardSimple({ product }: ProductCardSimpleProps) {
-  const { title, image, price, quantity } = product
+  const { id, title, image, price, quantity } = product
   const [itemQuantity, setItemQuantity] = useState(quantity)
+  const { removeFromCart } = useContext(CartContext)
 
   function handleIncrementQuantity() {
     setItemQuantity((state) => state + 1)
@@ -26,6 +28,10 @@ export function ProductCardSimple({ product }: ProductCardSimpleProps) {
     if (itemQuantity > 1) {
       setItemQuantity((state) => state - 1)
     }
+  }
+
+  function handleRemoveProductFromCart() {
+    removeFromCart(id)
   }
 
   const isDecrementButtonDisabled = itemQuantity === 1
@@ -48,7 +54,7 @@ export function ProductCardSimple({ product }: ProductCardSimpleProps) {
             decrementQuantity={handleDecrementQuantity}
           />
 
-          <ButtonSecondary>
+          <ButtonSecondary onClick={handleRemoveProductFromCart}>
             <Trash size={16} />
             Remover
           </ButtonSecondary>

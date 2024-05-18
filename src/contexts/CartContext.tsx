@@ -9,7 +9,7 @@ interface CartContextProps {
   cartItems: number
   cart: CartItemProps[]
   addToCart: (product: CartItemProps) => void
-  removeFromCart: (product: CartItemProps) => void
+  removeFromCart: (productId: number) => void
   updateCart: (product: CartItemProps) => void
   checkProductExistsInCart: (productId: number) => boolean
 }
@@ -29,10 +29,11 @@ export function CartProvider({ children }: CartProviderProps) {
     setCartItems((state) => state + 1)
   }
 
-  function removeFromCart(product: CartItemProps) {
-    const filteredCart = cart.filter((item) => item !== product)
+  function removeFromCart(productId: number) {
+    const filteredCart = cart.filter((item) => item.id !== productId)
 
     setCart(filteredCart)
+    setCartItems((state) => state - 1)
   }
 
   function updateCart(product: CartItemProps) {
