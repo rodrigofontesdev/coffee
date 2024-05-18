@@ -1,5 +1,5 @@
 import { Trash } from '@phosphor-icons/react'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { ButtonSecondary } from '../../../../components/ButtonSecondary'
 import { InputNumber } from '../../../../components/Forms/InputNumber'
 import { CartContext } from '../../../../contexts/CartContext'
@@ -16,17 +16,16 @@ interface ProductCardSimpleProps {
 }
 
 export function ProductCardSimple({ product }: ProductCardSimpleProps) {
+  const { removeFromCart, updateCart } = useContext(CartContext)
   const { id, title, image, price, quantity } = product
-  const [itemQuantity, setItemQuantity] = useState(quantity)
-  const { removeFromCart } = useContext(CartContext)
 
   function handleIncrementQuantity() {
-    setItemQuantity((state) => state + 1)
+    updateCart({ productId: id, quantity: quantity + 1 })
   }
 
   function handleDecrementQuantity() {
-    if (itemQuantity > 1) {
-      setItemQuantity((state) => state - 1)
+    if (quantity > 1) {
+      updateCart({ productId: id, quantity: quantity - 1 })
     }
   }
 
@@ -34,7 +33,7 @@ export function ProductCardSimple({ product }: ProductCardSimpleProps) {
     removeFromCart(id)
   }
 
-  const isDecrementButtonDisabled = itemQuantity === 1
+  const isDecrementButtonDisabled = quantity === 1
 
   return (
     <ProductContainer>
@@ -48,7 +47,7 @@ export function ProductCardSimple({ product }: ProductCardSimpleProps) {
 
         <Actions>
           <InputNumber
-            quantity={itemQuantity}
+            quantity={quantity}
             disableDecrementButton={isDecrementButtonDisabled}
             incrementQuantity={handleIncrementQuantity}
             decrementQuantity={handleDecrementQuantity}

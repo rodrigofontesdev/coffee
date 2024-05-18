@@ -5,12 +5,17 @@ interface CartItemProps extends Pick<ProductProps, 'id' | 'title' | 'image' | 'p
   quantity: number
 }
 
+interface ItemQuantityProps {
+  productId: number
+  quantity: number
+}
+
 interface CartContextProps {
   cartItems: number
   cart: CartItemProps[]
   addToCart: (product: CartItemProps) => void
   removeFromCart: (productId: number) => void
-  updateCart: (product: CartItemProps) => void
+  updateCart: ({ productId, quantity }: ItemQuantityProps) => void
   checkProductExistsInCart: (productId: number) => boolean
 }
 
@@ -36,10 +41,10 @@ export function CartProvider({ children }: CartProviderProps) {
     setCartItems((state) => state - 1)
   }
 
-  function updateCart(product: CartItemProps) {
+  function updateCart({ productId, quantity }: ItemQuantityProps) {
     const updatedCart = cart.map((item) => {
-      if (item === product) {
-        return { ...item, quantity: product.quantity }
+      if (item.id === productId) {
+        return { ...item, quantity }
       }
 
       return item
