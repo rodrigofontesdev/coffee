@@ -13,6 +13,9 @@ interface ItemQuantityProps {
 interface CartContextProps {
   cartItems: number
   cart: CartItemProps[]
+  fee: number
+  subtotal: number
+  total: number
   addToCart: (product: CartItemProps) => void
   removeFromCart: (productId: number) => void
   updateCart: ({ productId, quantity }: ItemQuantityProps) => void
@@ -59,9 +62,27 @@ export function CartProvider({ children }: CartProviderProps) {
     return product >= 0
   }
 
+  const fee = cart.length > 0 ? 3.5 : 0
+  const subtotal = cart.reduce((acc, item) => {
+    acc += item.price * item.quantity
+
+    return acc
+  }, 0)
+  const total = subtotal + fee
+
   return (
     <CartContext.Provider
-      value={{ cartItems, cart, addToCart, removeFromCart, updateCart, checkProductExistsInCart }}
+      value={{
+        cartItems,
+        cart,
+        fee,
+        subtotal,
+        total,
+        addToCart,
+        removeFromCart,
+        updateCart,
+        checkProductExistsInCart,
+      }}
     >
       {children}
     </CartContext.Provider>
