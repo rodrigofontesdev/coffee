@@ -2,12 +2,12 @@ import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money } from '@phosphor-i
 import { useContext } from 'react'
 import { ButtonPrimary } from '../../components/ButtonPrimary'
 import { CartContext } from '../../contexts/CartContext'
+import { OrderTotal } from './components/OrderTotal'
 import { ProductCardSimple } from './components/ProductCardSimple'
 import {
   Address,
   AddressFormFields,
-  CartDetails,
-  CartSubtotal,
+  Cart,
   CheckControl,
   CheckGroup,
   CheckLabel,
@@ -16,8 +16,8 @@ import {
   Delivery,
   InputControl,
   InputGroup,
+  Order,
   PaymentMethods,
-  Subtotal,
 } from './styles'
 
 export function Checkout() {
@@ -135,28 +135,19 @@ export function Checkout() {
             </PaymentMethods>
           </Delivery>
 
-          <CartDetails>
+          <Cart>
             <h2>Cafés selecionados</h2>
 
-            <CartSubtotal>
+            <Order>
               {cart.map((product) => (
                 <ProductCardSimple key={product.id} product={product} />
               ))}
 
-              <Subtotal>
-                <span>Total de itens</span>
-                <span>R$ 29,70</span>
+              <OrderTotal />
 
-                <span>Entrega</span>
-                <span>R$ 3,50</span>
-
-                <span>Total</span>
-                <span>R$ 33,20</span>
-
-                <ButtonPrimary fill>Confirmar Pedido</ButtonPrimary>
-              </Subtotal>
-            </CartSubtotal>
-          </CartDetails>
+              <ButtonPrimary fill>Confirmar Pedido</ButtonPrimary>
+            </Order>
+          </Cart>
         </CheckoutForm>
       </Container>
     </main>

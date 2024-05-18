@@ -224,7 +224,7 @@ export const PaymentMethods = styled(WrapperBase)`
   }
 `
 
-export const CartDetails = styled.div`
+export const Cart = styled.div`
   width: 40%;
   display: flex;
   flex-direction: column;
@@ -246,36 +246,7 @@ export const CartDetails = styled.div`
   }
 `
 
-export const CartSubtotal = styled(WrapperBase)`
+export const Order = styled(WrapperBase)`
   border-radius: 6px 36px;
   row-gap: 0;
-`
-
-export const Subtotal = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  row-gap: 0.75rem;
-  font-weight: 400;
-
-  span:nth-of-type(even) {
-    text-align: right;
-  }
-
-  span:nth-of-type(1),
-  span:nth-of-type(3) {
-    font-size: 0.875rem;
-  }
-
-  span:nth-of-type(5),
-  span:nth-of-type(6) {
-    color: ${(props) => props.theme['gray-800']};
-    font-size: 1.25rem;
-    font-weight: 700;
-  }
-
-  button {
-    margin-top: 0.75rem;
-    grid-column: span 2;
-  }
 `

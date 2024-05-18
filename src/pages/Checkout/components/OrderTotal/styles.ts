@@ -5,6 +5,7 @@ export const OrderTotalContainer = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
   row-gap: 0.75rem;
+  margin-bottom: 1.5rem;
 `
 
 interface SpanProps {
