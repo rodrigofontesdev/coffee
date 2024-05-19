@@ -20,7 +20,12 @@ export const Button = styled.button<ButtonProps>`
   border-radius: 6px;
   transition: background 300ms ease-in-out;
 
-  &:hover {
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
     background-color: ${(props) => props.theme['yellow-800']};
   }
 `
