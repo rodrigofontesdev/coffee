@@ -58,7 +58,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
       <Buy>
         <Price>
-          R$ <span>{format.price(price)}</span>
+          R$ <span>{format.price(price, false)}</span>
         </Price>
 
         <AddToCart>

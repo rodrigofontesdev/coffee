@@ -42,7 +42,7 @@ export function ProductCardSimple({ product }: ProductCardSimpleProps) {
       <Details>
         <Heading>
           <h3>{title}</h3>
-          <span>R$ {format.price(price)}</span>
+          <span>{format.price(price)}</span>
         </Heading>
 
         <Actions>

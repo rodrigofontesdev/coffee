@@ -1,10 +1,10 @@
-const formatPrice = (amount: number) => {
+const formatPrice = (amount: number, displaySymbol: boolean = true) => {
   const priceFormatted = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
   }).format(amount)
 
-  return priceFormatted.replace('R$', '').trim()
+  return displaySymbol ? priceFormatted : priceFormatted.replace('R$', '').trim()
 }
 
 const formatZipcode = (value: string) => {
