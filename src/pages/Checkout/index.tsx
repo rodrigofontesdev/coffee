@@ -2,6 +2,7 @@ import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money } from '@phosphor-i
 import { useContext } from 'react'
 import { ButtonPrimary } from '../../components/ButtonPrimary'
 import { CartContext } from '../../contexts/CartContext'
+import { EmptyCart } from './components/EmptyCart'
 import { OrderTotal } from './components/OrderTotal'
 import { ProductCardSimple } from './components/ProductCardSimple'
 import {
@@ -22,6 +23,7 @@ import {
 
 export function Checkout() {
   const { cart } = useContext(CartContext)
+  const isCompleteOrderButtonDisabled = cart.length === 0
 
   return (
     <main>
@@ -139,13 +141,17 @@ export function Checkout() {
             <h2>Cafés selecionados</h2>
 
             <Order>
-              {cart.map((product) => (
-                <ProductCardSimple key={product.id} product={product} />
-              ))}
+              {cart.length > 0 ? (
+                cart.map((product) => <ProductCardSimple key={product.id} product={product} />)
+              ) : (
+                <EmptyCart />
+              )}
 
               <OrderTotal />
 
-              <ButtonPrimary fill>Confirmar Pedido</ButtonPrimary>
+              <ButtonPrimary fill disabled={isCompleteOrderButtonDisabled}>
+                Confirmar Pedido
+              </ButtonPrimary>
             </Order>
           </Cart>
         </CheckoutForm>
