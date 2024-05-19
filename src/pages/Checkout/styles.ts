@@ -90,7 +90,7 @@ export const AddressFormFields = styled.div`
 export const InputGroup = styled.div<{ $cols?: number }>`
   display: flex;
   flex-direction: column;
-  ${(props) => props.$cols && `grid-column: span ${props.$cols};`}
+  grid-column: span ${(props) => (props.$cols ? props.$cols : 12)};
   position: relative;
 `
 
@@ -147,7 +147,16 @@ export const InputControl = styled.input`
   }
 `
 
-export const CheckGroup = styled(InputGroup)``
+export const InputError = styled.div`
+  color: ${(props) => props.theme['yellow-800']};
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+`
+
+export const CheckGroup = styled(InputGroup)`
+  grid-column: auto;
+`
 
 export const CheckLabel = styled.label`
   display: flex;
@@ -218,8 +227,13 @@ export const PaymentMethods = styled(WrapperBase)`
       grid-template-columns: repeat(1, minmax(0, 1fr));
     }
 
-    > div {
+    & > ${CheckGroup} {
       display: grid;
+    }
+
+    & > ${InputError} {
+      grid-column: span 3;
+      margin-top: -0.25rem;
     }
   }
 `
