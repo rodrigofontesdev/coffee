@@ -1,9 +1,38 @@
 import { CurrencyDollar, MapPin, Timer } from '@phosphor-icons/react'
+import { useContext, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { CartContext } from '../../contexts/CartContext'
 import { Container, InfoRow, OrderInfo } from './styles'
 
 import deliveryImg from '../../assets/images/ilustracao-entregador.svg'
 
 export function Order() {
+  const { order } = useContext(CartContext)
+  const navigate = useNavigate()
+  const shipping = order?.shipping
+  const billing = order?.billing
+  let paymentMethodReadable
+
+  useEffect(() => {
+    if (order === null) {
+      navigate('/checkout')
+    }
+  }, [order, navigate])
+
+  switch (billing?.paymentMethod) {
+    case 'creditCard':
+      paymentMethodReadable = 'Cartão de Crédito'
+      break
+    case 'debitCard':
+      paymentMethodReadable = 'Cartão de Débito'
+      break
+    case 'cash':
+      paymentMethodReadable = 'Dinheiro'
+      break
+    default:
+      paymentMethodReadable = ''
+  }
+
   return (
     <main>
       <Container>
@@ -19,9 +48,12 @@ export function Order() {
                 <MapPin size={16} weight="fill" />
               </span>
               <p>
-                Entrega em <strong>Rua Isidoro Fontes, 100</strong>
+                Entrega em{' '}
+                <strong>
+                  {shipping?.street}, {shipping?.streetNumber} - {shipping?.complement}
+                </strong>
                 <br />
-                Centro Alto - Ribeirão Pires, SP
+                {shipping?.neighborhood} - {shipping?.city}, {shipping?.state}
               </p>
             </InfoRow>
 
@@ -43,7 +75,7 @@ export function Order() {
               <p>
                 Pagamento na entrega
                 <br />
-                <strong>Cartão de Crédito</strong>
+                <strong>{paymentMethodReadable}</strong>
               </p>
             </InfoRow>
           </OrderInfo>
