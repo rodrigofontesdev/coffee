@@ -2,6 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money } from '@phosphor-icons/react'
 import { ChangeEvent, useContext } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import * as z from 'zod'
 import { ButtonPrimary } from '../../components/ButtonPrimary'
 import { CartContext } from '../../contexts/CartContext'
@@ -49,10 +50,10 @@ const checkoutFormValidation = z.object({
   }),
 })
 
-type CheckoutFormData = z.infer<typeof checkoutFormValidation>
+export type CheckoutFormData = z.infer<typeof checkoutFormValidation>
 
 export function Checkout() {
-  const { cart } = useContext(CartContext)
+  const { cart, createOrder, fee, subtotal, total } = useContext(CartContext)
   const {
     handleSubmit,
     register,
@@ -71,9 +72,25 @@ export function Checkout() {
       state: '',
     },
   })
+  const navigate = useNavigate()
 
   function handleSubmitCheckoutForm(data: CheckoutFormData) {
-    console.log(data)
+    const { zipcode, street, streetNumber, complement, neighborhood, city, state } = data
+    const orderId = new Date().getTime()
+
+    createOrder({
+      orderId: orderId,
+      items: cart,
+      billing: {
+        paymentMethod: data.paymentMethod,
+        fee: fee,
+        subtotal: subtotal,
+        total: total,
+      },
+      shipping: { zipcode, street, streetNumber, complement, neighborhood, city, state },
+    })
+
+    navigate(`/order/${orderId}`)
   }
 
   const isCompleteOrderButtonDisabled = cart.length === 0

@@ -1,4 +1,5 @@
 import { ReactNode, createContext, useState } from 'react'
+import { CheckoutFormData } from '../pages/Checkout'
 import { ProductProps } from '../utils/data/products'
 
 interface CartItemProps extends Pick<ProductProps, 'id' | 'title' | 'image' | 'price'> {
@@ -10,9 +11,24 @@ interface ItemQuantityProps {
   quantity: number
 }
 
+type ShippingProps = Omit<CheckoutFormData, 'paymentMethod'>
+
+interface OrderProps {
+  orderId: number | null
+  items: CartItemProps[]
+  billing: {
+    paymentMethod: CheckoutFormData['paymentMethod']
+    fee: number
+    subtotal: number
+    total: number
+  } | null
+  shipping: ShippingProps | null
+}
+
 interface CartContextProps {
   cartItems: number
   cart: CartItemProps[]
+  order: OrderProps | null
   fee: number
   subtotal: number
   total: number
@@ -20,6 +36,7 @@ interface CartContextProps {
   removeFromCart: (productId: number) => void
   updateCart: ({ productId, quantity }: ItemQuantityProps) => void
   checkProductExistsInCart: (productId: number) => boolean
+  createOrder: (data: OrderProps) => void
 }
 
 interface CartProviderProps {
@@ -31,6 +48,7 @@ export const CartContext = createContext({} as CartContextProps)
 export function CartProvider({ children }: CartProviderProps) {
   const [cartItems, setCartItems] = useState(0)
   const [cart, setCart] = useState<CartItemProps[]>([])
+  const [order, setOrder] = useState<OrderProps | null>(null)
 
   function addToCart(product: CartItemProps) {
     setCart((state) => [product, ...state])
@@ -62,6 +80,11 @@ export function CartProvider({ children }: CartProviderProps) {
     return product >= 0
   }
 
+  function createOrder(data: OrderProps) {
+    setOrder(data)
+    setCart([])
+  }
+
   const fee = cart.length > 0 ? 3.5 : 0
   const subtotal = cart.reduce((acc, item) => {
     acc += item.price * item.quantity
@@ -75,6 +98,7 @@ export function CartProvider({ children }: CartProviderProps) {
       value={{
         cartItems,
         cart,
+        order,
         fee,
         subtotal,
         total,
@@ -82,6 +106,7 @@ export function CartProvider({ children }: CartProviderProps) {
         removeFromCart,
         updateCart,
         checkProductExistsInCart,
+        createOrder,
       }}
     >
       {children}
