@@ -7,7 +7,7 @@ import { Actions, Cart, CartItems, HeaderContainer, Location } from './styles'
 import logoImg from '../../assets/images/logo.svg'
 
 export function Header() {
-  const { cartItems } = useContext(CartContext)
+  const { cartTotalItems } = useContext(CartContext)
 
   return (
     <HeaderContainer>
@@ -23,7 +23,7 @@ export function Header() {
 
         <Cart to="/checkout">
           <ShoppingCart size={22} weight="fill" />
-          {cartItems > 0 && <CartItems>{cartItems}</CartItems>}
+          {cartTotalItems > 0 && <CartItems>{cartTotalItems}</CartItems>}
         </Cart>
       </Actions>
     </HeaderContainer>
