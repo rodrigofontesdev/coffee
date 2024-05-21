@@ -53,7 +53,7 @@ const checkoutFormValidation = z.object({
 export type CheckoutFormData = z.infer<typeof checkoutFormValidation>
 
 export function Checkout() {
-  const { cart, createOrder, fee, subtotal, total } = useContext(CartContext)
+  const { cart, cartTotalItems, createOrder, fee, subtotal, total } = useContext(CartContext)
   const {
     handleSubmit,
     register,
@@ -93,7 +93,7 @@ export function Checkout() {
     navigate(`/order/${orderId}`)
   }
 
-  const isCompleteOrderButtonDisabled = cart.length === 0
+  const isCompleteOrderButtonDisabled = cartTotalItems === 0
 
   return (
     <main>
@@ -234,7 +234,7 @@ export function Checkout() {
             <h2>Cafés selecionados</h2>
 
             <Order>
-              {cart.length > 0 ? (
+              {cartTotalItems > 0 ? (
                 cart.map((product) => <ProductCardSimple key={product.id} product={product} />)
               ) : (
                 <EmptyCart />
