@@ -26,8 +26,8 @@ interface OrderProps {
 }
 
 interface CartContextProps {
-  cartItems: number
   cart: CartItemProps[]
+  cartTotalItems: number
   order: OrderProps | null
   fee: number
   subtotal: number
@@ -46,20 +46,17 @@ interface CartProviderProps {
 export const CartContext = createContext({} as CartContextProps)
 
 export function CartProvider({ children }: CartProviderProps) {
-  const [cartItems, setCartItems] = useState(0)
   const [cart, setCart] = useState<CartItemProps[]>([])
   const [order, setOrder] = useState<OrderProps | null>(null)
 
   function addToCart(product: CartItemProps) {
     setCart((state) => [product, ...state])
-    setCartItems((state) => state + 1)
   }
 
   function removeFromCart(productId: number) {
     const filteredCart = cart.filter((item) => item.id !== productId)
 
     setCart(filteredCart)
-    setCartItems((state) => state - 1)
   }
 
   function updateCart({ productId, quantity }: ItemQuantityProps) {
@@ -85,7 +82,8 @@ export function CartProvider({ children }: CartProviderProps) {
     setCart([])
   }
 
-  const fee = cart.length > 0 ? 3.5 : 0
+  const cartTotalItems = cart.length
+  const fee = cartTotalItems > 0 ? 3.5 : 0
   const subtotal = cart.reduce((acc, item) => {
     acc += item.price * item.quantity
 
@@ -96,8 +94,8 @@ export function CartProvider({ children }: CartProviderProps) {
   return (
     <CartContext.Provider
       value={{
-        cartItems,
         cart,
+        cartTotalItems,
         order,
         fee,
         subtotal,
