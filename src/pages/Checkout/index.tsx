@@ -75,6 +75,10 @@ export function Checkout() {
   const navigate = useNavigate()
 
   function handleSubmitCheckoutForm(data: CheckoutFormData) {
+    if (cartTotalItems < 1) {
+      return
+    }
+
     const { zipcode, street, streetNumber, complement, neighborhood, city, state } = data
     const orderId = new Date().getTime()
 
