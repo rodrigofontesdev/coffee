@@ -1,6 +1,6 @@
 import { RouterProvider } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
-import { CartProvider } from './contexts/CartContext'
+import { CartProvider } from './contexts/CartProvider'
 import { router } from './routes/Root'
 
 import { GlobalStyle } from './styles/global'
