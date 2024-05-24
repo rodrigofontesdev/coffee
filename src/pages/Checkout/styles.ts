@@ -189,7 +189,8 @@ export const CheckControl = styled.input`
   clip: rect(0, 0, 0, 0);
   pointer-events: none;
 
-  &:checked + label {
+  &:checked + label,
+  &:focus + label {
     background-color: ${(props) => props.theme['purple-300']};
     border-color: ${(props) => props.theme['purple-700']};
   }
