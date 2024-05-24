@@ -1,6 +1,6 @@
 import { CheckFat, ShoppingCartSimple } from '@phosphor-icons/react'
-import { useContext, useState } from 'react'
-import { CartContext } from '../../contexts/CartContext'
+import { useState } from 'react'
+import { useCart } from '../../hooks/useCart'
 import { ProductProps } from '../../utils/data/products'
 import { format } from '../../utils/functions/formatter'
 import { ButtonIcon } from '../ButtonIcon'
@@ -12,7 +12,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const { addToCart, checkProductExistsInCart } = useContext(CartContext)
+  const { addToCart, checkProductExistsInCart } = useCart()
   const [quantity, setQuantity] = useState(1)
 
   const { id, title, description, image, tags, price } = product

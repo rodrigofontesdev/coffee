@@ -1,11 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Bank, CreditCard, CurrencyDollar, MapPinLine, Money } from '@phosphor-icons/react'
-import { ChangeEvent, useContext } from 'react'
+import { ChangeEvent } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import * as z from 'zod'
 import { ButtonPrimary } from '../../components/ButtonPrimary'
-import { CartContext } from '../../contexts/CartContext'
+import { useCart } from '../../hooks/useCart'
 import { states } from '../../utils/data/states'
 import { format } from '../../utils/functions/formatter'
 import { EmptyCart } from './components/EmptyCart'
@@ -53,7 +53,7 @@ const checkoutFormValidation = z.object({
 export type CheckoutFormData = z.infer<typeof checkoutFormValidation>
 
 export function Checkout() {
-  const { cart, cartTotalItems, createOrder, fee, subtotal, total } = useContext(CartContext)
+  const { cart, cartTotalItems, createOrder, fee, subtotal, total } = useCart()
   const {
     handleSubmit,
     register,

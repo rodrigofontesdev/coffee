@@ -1,10 +1,9 @@
-import { useContext } from 'react'
-import { CartContext } from '../../../../contexts/CartContext'
+import { useCart } from '../../../../hooks/useCart'
 import { format } from '../../../../utils/functions/formatter'
 import { Label, OrderTotalContainer, Price } from './styles'
 
 export function OrderTotal() {
-  const { fee, subtotal, total } = useContext(CartContext)
+  const { fee, subtotal, total } = useCart()
 
   return (
     <OrderTotalContainer>

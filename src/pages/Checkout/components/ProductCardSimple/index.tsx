@@ -1,8 +1,7 @@
 import { Trash } from '@phosphor-icons/react'
-import { useContext } from 'react'
 import { ButtonSecondary } from '../../../../components/ButtonSecondary'
 import { InputNumber } from '../../../../components/Forms/InputNumber'
-import { CartContext } from '../../../../contexts/CartContext'
+import { useCart } from '../../../../hooks/useCart'
 import { ProductProps } from '../../../../utils/data/products'
 import { format } from '../../../../utils/functions/formatter'
 import { Actions, Details, Heading, ProductContainer } from './styles'
@@ -16,7 +15,7 @@ interface ProductCardSimpleProps {
 }
 
 export function ProductCardSimple({ product }: ProductCardSimpleProps) {
-  const { removeFromCart, updateCart } = useContext(CartContext)
+  const { removeFromCart, updateCart } = useCart()
   const { id, title, image, price, quantity } = product
 
   function handleIncrementQuantity() {

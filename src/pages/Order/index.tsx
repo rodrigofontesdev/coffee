@@ -1,13 +1,13 @@
 import { CurrencyDollar, MapPin, Timer } from '@phosphor-icons/react'
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { CartContext } from '../../contexts/CartContext'
 import { Container, InfoRow, OrderInfo } from './styles'
 
 import deliveryImg from '../../assets/images/ilustracao-entregador.svg'
+import { useCart } from '../../hooks/useCart'
 
 export function Order() {
-  const { order } = useContext(CartContext)
+  const { order } = useCart()
   const navigate = useNavigate()
   const shipping = order?.shipping
   const billing = order?.billing
