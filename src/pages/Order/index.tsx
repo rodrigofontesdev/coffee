@@ -1,37 +1,23 @@
 import { CurrencyDollar, MapPin, Timer } from '@phosphor-icons/react'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useCart } from '../../hooks/useCart'
+import { mutate } from '../../utils/functions/mutator'
 import { Container, InfoRow, OrderInfo } from './styles'
 
 import deliveryImg from '../../assets/images/ilustracao-entregador.svg'
-import { useCart } from '../../hooks/useCart'
 
 export function Order() {
   const { order } = useCart()
   const navigate = useNavigate()
   const shipping = order?.shipping
   const billing = order?.billing
-  let paymentMethodReadable
 
   useEffect(() => {
-    if (order === null) {
+    if (!order) {
       navigate('/checkout')
     }
   }, [order, navigate])
-
-  switch (billing?.paymentMethod) {
-    case 'creditCard':
-      paymentMethodReadable = 'Cartão de Crédito'
-      break
-    case 'debitCard':
-      paymentMethodReadable = 'Cartão de Débito'
-      break
-    case 'cash':
-      paymentMethodReadable = 'Dinheiro'
-      break
-    default:
-      paymentMethodReadable = ''
-  }
 
   return (
     <main>
@@ -50,7 +36,8 @@ export function Order() {
               <p>
                 Entrega em{' '}
                 <strong>
-                  {shipping?.street}, {shipping?.streetNumber} - {shipping?.complement}
+                  {shipping?.street}, {shipping?.streetNumber}
+                  {shipping?.complement && ` - ${shipping?.complement}`}
                 </strong>
                 <br />
                 {shipping?.neighborhood} - {shipping?.city}, {shipping?.state}
@@ -75,7 +62,9 @@ export function Order() {
               <p>
                 Pagamento na entrega
                 <br />
-                <strong>{paymentMethodReadable}</strong>
+                {billing?.paymentMethod && (
+                  <strong>{mutate.paymentMethod(billing?.paymentMethod)}</strong>
+                )}
               </p>
             </InfoRow>
           </OrderInfo>
