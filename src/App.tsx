@@ -18,7 +18,8 @@ export default function App() {
       <ToastContainer
         position="top-right"
         theme="light"
-        autoClose={5000}
+        autoClose={2000}
+        closeOnClick={true}
         pauseOnHover={false}
         draggable={false}
         transition={Bounce}

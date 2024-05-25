@@ -37,7 +37,7 @@ export function ProductCard({ product }: ProductCardProps) {
       quantity,
     })
 
-    toast.success('Produto adicionado no carrinho com sucesso.')
+    toast.success('Produto adicionado no carrinho.')
   }
 
   const isProductAddedToCart = checkProductExistsInCart(id)
