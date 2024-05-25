@@ -11,7 +11,6 @@ export const Button = styled.button<ButtonProps>`
   column-gap: 0.5rem;
   padding: 0.5rem;
   border-radius: 6px;
-  transition: background 300ms ease-in-out;
 
   &:disabled {
     cursor: not-allowed;
@@ -25,6 +24,7 @@ export const Button = styled.button<ButtonProps>`
 
           &:not(:disabled):hover {
             background-color: ${(props) => props.theme['yellow-500']};
+            transition: background-color 300ms;
           }
         `
       }
@@ -34,6 +34,7 @@ export const Button = styled.button<ButtonProps>`
 
           &:not(:disabled):hover {
             background-color: ${(props) => props.theme['purple-700']};
+            transition: background-color 300ms;
           }
         `
       }

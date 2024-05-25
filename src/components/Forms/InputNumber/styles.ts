@@ -27,7 +27,6 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  transition: fill 300ms ease-in-out;
 
   &:disabled {
     cursor: not-allowed;
@@ -39,6 +38,7 @@ const Button = styled.button`
 
   &:not(:disabled):hover svg {
     fill: ${(props) => props.theme['purple-900']};
+    transition: fill 300ms;
   }
 `
 

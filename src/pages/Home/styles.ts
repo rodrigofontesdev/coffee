@@ -44,11 +44,11 @@ export const TagItem = styled.li<TagItemProps>`
   border: 1px solid ${(props) => props.theme['yellow-500']};
   border-radius: 1rem;
   cursor: pointer;
-  transition: all 300ms ease-in-out;
 
   &:hover {
     background-color: ${(props) => props.theme['yellow-500']};
     color: ${(props) => props.theme['white']};
+    transition: all 300ms;
   }
 
   ${(props) =>

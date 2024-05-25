@@ -100,7 +100,6 @@ export const InputControl = styled.input`
   padding: 0.75rem;
   border: 1px solid ${(props) => props.theme['gray-300']};
   border-radius: 4px;
-  transition: border 300ms ease-in-out;
 
   & + span {
     position: absolute;
@@ -121,6 +120,7 @@ export const InputControl = styled.input`
   &:hover,
   &:focus {
     border-color: ${(props) => props.theme['yellow-800']};
+    transition: border-color 300ms;
 
     &::placeholder {
       color: ${(props) => props.theme['gray-700']};
@@ -172,10 +172,10 @@ export const CheckLabel = styled.label`
   border: 1px solid transparent;
   border-radius: 6px;
   cursor: pointer;
-  transition: background, border 300ms ease-in-out;
 
   &:hover {
     background-color: ${(props) => props.theme['gray-400']};
+    transition: background-color 300ms;
   }
 
   & > svg {

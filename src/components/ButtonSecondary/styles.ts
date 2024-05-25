@@ -12,10 +12,10 @@ export const Button = styled.button`
   text-transform: uppercase;
   padding: 0.5rem;
   border-radius: 6px;
-  transition: background 300ms ease-in-out;
 
   &:hover {
     background-color: ${(props) => props.theme['gray-400']};
+    transition: background-color 300ms;
   }
 
   svg {

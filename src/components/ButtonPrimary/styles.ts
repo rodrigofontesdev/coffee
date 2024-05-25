@@ -18,7 +18,6 @@ export const Button = styled.button<ButtonProps>`
   line-height: 1.6;
   padding: 0.75rem 0.5rem;
   border-radius: 6px;
-  transition: background 300ms ease-in-out;
 
   &:disabled {
     opacity: 0.7;
@@ -27,5 +26,6 @@ export const Button = styled.button<ButtonProps>`
 
   &:not(:disabled):hover {
     background-color: ${(props) => props.theme['yellow-800']};
+    transition: background-color 300ms;
   }
 `
