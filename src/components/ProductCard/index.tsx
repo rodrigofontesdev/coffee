@@ -1,5 +1,6 @@
 import { CheckFat, ShoppingCartSimple } from '@phosphor-icons/react'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 import { useCart } from '../../hooks/useCart'
 import { ProductProps } from '../../utils/data/products'
 import { format } from '../../utils/functions/formatter'
@@ -35,6 +36,8 @@ export function ProductCard({ product }: ProductCardProps) {
       price,
       quantity,
     })
+
+    toast.success('Produto adicionado no carrinho com sucesso.')
   }
 
   const isProductAddedToCart = checkProductExistsInCart(id)
