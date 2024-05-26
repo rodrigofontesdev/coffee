@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
 import { mutate } from '../../utils/functions/mutator'
-import { Container, InfoRow, OrderInfo } from './styles'
+import { Container, Illustration, Info, InfoIcon, OrderInfo, Row } from './styles'
 
 import deliveryImg from '../../assets/images/ilustracao-entregador.svg'
 
@@ -27,38 +27,45 @@ export function Order() {
           <p>Agora é só aguardar que logo o café chegará até você</p>
         </header>
 
-        <div>
+        <Row>
           <OrderInfo>
-            <InfoRow>
-              <span>
+            <Info>
+              <InfoIcon $variant="purple-700">
                 <MapPin size={16} weight="fill" />
-              </span>
+              </InfoIcon>
+
               <p>
                 Entrega em{' '}
-                <strong>
-                  {shipping?.street}, {shipping?.streetNumber}
-                  {shipping?.complement && ` - ${shipping?.complement}`}
-                </strong>
-                <br />
-                {shipping?.neighborhood} - {shipping?.city}, {shipping?.state}
+                {shipping?.street && (
+                  <>
+                    <strong>
+                      {shipping?.street}, {shipping?.streetNumber}
+                      {shipping?.complement && ` - ${shipping?.complement}`}
+                    </strong>
+                    <br />
+                    {shipping?.neighborhood} - {shipping?.city}, {shipping?.state}
+                  </>
+                )}
               </p>
-            </InfoRow>
+            </Info>
 
-            <InfoRow>
-              <span>
+            <Info>
+              <InfoIcon $variant="yellow-500">
                 <Timer size={16} weight="fill" />
-              </span>
+              </InfoIcon>
+
               <p>
                 Previsão de entrega
                 <br />
-                <strong>20 min - 30 min</strong>
+                {order && <strong>20 min - 30 min</strong>}
               </p>
-            </InfoRow>
+            </Info>
 
-            <InfoRow>
-              <span>
+            <Info>
+              <InfoIcon $variant="yellow-800">
                 <CurrencyDollar size={16} />
-              </span>
+              </InfoIcon>
+
               <p>
                 Pagamento na entrega
                 <br />
@@ -66,16 +73,16 @@ export function Order() {
                   <strong>{mutate.paymentMethod(billing?.paymentMethod)}</strong>
                 )}
               </p>
-            </InfoRow>
+            </Info>
           </OrderInfo>
 
-          <div>
+          <Illustration>
             <img
               src={deliveryImg}
               alt="Ilustração de um homem usando uma camiseta amarela, calça verde e tênis preto, dirigindo uma moto modelo Vespa na cor roxa"
             />
-          </div>
-        </div>
+          </Illustration>
+        </Row>
       </Container>
     </main>
   )
