@@ -56,25 +56,25 @@ export function CartProvider({ children }: CartProviderProps) {
   }
 
   function removeFromCart(productId: number) {
-    const filteredCart = cart.filter((item) => item.id !== productId)
+    const filteredCart = cart.filter((product) => product.id !== productId)
 
     setCart(filteredCart)
   }
 
   function updateCart({ productId, quantity }: ItemQuantityProps) {
-    const updatedCart = cart.map((item) => {
-      if (item.id === productId) {
-        return { ...item, quantity }
+    const updatedCart = cart.map((product) => {
+      if (product.id === productId) {
+        return { ...product, quantity }
       }
 
-      return item
+      return product
     })
 
     setCart(updatedCart)
   }
 
   function checkProductExistsInCart(productId: number) {
-    const product = cart.findIndex((item) => item.id === productId)
+    const product = cart.findIndex((product) => product.id === productId)
 
     return product >= 0
   }
@@ -86,8 +86,8 @@ export function CartProvider({ children }: CartProviderProps) {
 
   const cartTotalItems = cart.length
   const fee = cartTotalItems > 0 ? 3.5 : 0
-  const subtotal = cart.reduce((acc, item) => {
-    acc += item.price * item.quantity
+  const subtotal = cart.reduce((acc, product) => {
+    acc += product.price * product.quantity
 
     return acc
   }, 0)
