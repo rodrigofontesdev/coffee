@@ -15,7 +15,7 @@ export function Order() {
 
   useEffect(() => {
     if (!order) {
-      navigate('/checkout')
+      navigate('/')
     }
   }, [order, navigate])
 
