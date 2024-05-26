@@ -17,6 +17,9 @@ export function ProductCard({ product }: ProductCardProps) {
   const [quantity, setQuantity] = useState(1)
 
   const { id, title, description, image, tags, price } = product
+  const isProductAddedToCart = checkProductExistsInCart(id)
+  const isIncrementButtonDisabled = isProductAddedToCart
+  const isDecrementButtonDisabled = isProductAddedToCart || quantity === 1
 
   function handleIncrementQuantity() {
     setQuantity((state) => state + 1)
@@ -39,10 +42,6 @@ export function ProductCard({ product }: ProductCardProps) {
 
     toast.success('Produto adicionado no carrinho.')
   }
-
-  const isProductAddedToCart = checkProductExistsInCart(id)
-  const isIncrementButtonDisabled = isProductAddedToCart
-  const isDecrementButtonDisabled = isProductAddedToCart || quantity === 1
 
   return (
     <ProductContainer>
