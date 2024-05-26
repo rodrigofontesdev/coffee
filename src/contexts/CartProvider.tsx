@@ -11,17 +11,19 @@ interface ItemQuantityProps {
   quantity: number
 }
 
+interface BillingProps {
+  paymentMethod: CheckoutFormData['paymentMethod']
+  fee: number
+  subtotal: number
+  total: number
+}
+
 type ShippingProps = Omit<CheckoutFormData, 'paymentMethod'>
 
 interface OrderProps {
   orderId: number | null
   items: CartItemProps[]
-  billing: {
-    paymentMethod: CheckoutFormData['paymentMethod']
-    fee: number
-    subtotal: number
-    total: number
-  } | null
+  billing: BillingProps | null
   shipping: ShippingProps | null
 }
 
