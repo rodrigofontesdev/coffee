@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { defaultTheme } from '../../../../styles/themes/default'
 
 import backgroundImg from '../../../../assets/images/hero-background.svg'
 
@@ -74,60 +75,44 @@ export const Perks = styled.ul`
   flex-wrap: wrap;
   row-gap: 1.25rem;
   list-style: none;
+`
 
-  li {
-    width: 50%;
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-    column-gap: 0.75rem;
+export const Perk = styled.li`
+  width: 50%;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  column-gap: 0.75rem;
+
+  @media (max-width: 640px) {
+    width: 100%;
+  }
+
+  &:nth-of-type(odd) {
+    padding-right: 1.25rem;
 
     @media (max-width: 640px) {
-      width: 100%;
-    }
-
-    span {
-      width: 2rem;
-      height: 2rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: ${(props) => props.theme.white};
-      border-radius: 100%;
-    }
-
-    &:nth-of-type(odd) {
-      padding-right: 1.25rem;
-
-      @media (max-width: 640px) {
-        padding-right: 0;
-      }
-    }
-
-    &:nth-of-type(1) {
-      span {
-        background-color: ${(props) => props.theme['yellow-800']};
-      }
-    }
-
-    &:nth-of-type(2) {
-      span {
-        background-color: ${(props) => props.theme['gray-700']};
-      }
-    }
-
-    &:nth-of-type(3) {
-      span {
-        background-color: ${(props) => props.theme['yellow-500']};
-      }
-    }
-
-    &:nth-of-type(4) {
-      span {
-        background-color: ${(props) => props.theme['purple-700']};
-      }
+      padding-right: 0;
     }
   }
+`
+
+const RoundIcon = styled.span`
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${(props) => props.theme.white};
+  border-radius: 100%;
+`
+
+interface PerkIconProps {
+  $variant: keyof typeof defaultTheme
+}
+
+export const PerkIcon = styled(RoundIcon)<PerkIconProps>`
+  background-color: ${(props) => props.theme[props.$variant]};
 `
 
 export const Image = styled.div`

@@ -1,5 +1,5 @@
 import { Coffee, Package, ShoppingCart, Timer } from '@phosphor-icons/react'
-import { ContainerFluid, Content, Image, Perks, Wrapper } from './styles'
+import { ContainerFluid, Content, Image, Perk, PerkIcon, Perks, Wrapper } from './styles'
 
 import heroImg from '../../../../assets/images/coffee-delivery-mockup.svg'
 
@@ -14,33 +14,33 @@ export function Hero() {
           </header>
 
           <Perks>
-            <li>
-              <span>
+            <Perk>
+              <PerkIcon $variant="yellow-800">
                 <ShoppingCart size={16} weight="fill" />
-              </span>
+              </PerkIcon>
               Compra simples e segura
-            </li>
+            </Perk>
 
-            <li>
-              <span>
+            <Perk>
+              <PerkIcon $variant="gray-700">
                 <Package size={16} weight="fill" />
-              </span>
+              </PerkIcon>
               Embalagem mantém o café intacto
-            </li>
+            </Perk>
 
-            <li>
-              <span>
+            <Perk>
+              <PerkIcon $variant="yellow-500">
                 <Timer size={16} weight="fill" />
-              </span>
+              </PerkIcon>
               Entrega rápida e rastreada
-            </li>
+            </Perk>
 
-            <li>
-              <span>
+            <Perk>
+              <PerkIcon $variant="purple-700">
                 <Coffee size={16} weight="fill" />
-              </span>
+              </PerkIcon>
               O café chega fresquinho até você
-            </li>
+            </Perk>
           </Perks>
         </Content>
 
