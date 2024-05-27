@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import { InputError, InputGroup } from '../../components/Forms/Input/styles'
+import { RadioGroup } from '../../components/Forms/InputRadio/styles'
 
 export const Container = styled.section`
   max-width: calc(70rem + 4.5rem);
@@ -31,7 +33,7 @@ export const Delivery = styled.div`
     width: 100%;
   }
 
-  h2 {
+  > h2 {
     color: ${(props) => props.theme['gray-800']};
     font-size: 1.125rem;
     font-weight: 700;
@@ -40,7 +42,7 @@ export const Delivery = styled.div`
   }
 `
 
-const WrapperBase = styled.div`
+const RoundedBackground = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 2rem;
@@ -49,7 +51,7 @@ const WrapperBase = styled.div`
   border-radius: 6px;
 `
 
-export const Address = styled(WrapperBase)`
+export const Address = styled(RoundedBackground)`
   margin-bottom: 0.75rem;
 
   header {
@@ -75,128 +77,19 @@ export const Address = styled(WrapperBase)`
   }
 `
 
-export const AddressFormFields = styled.div`
+export const AddressFields = styled.div`
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 1rem 0.75rem;
 
-  > div {
+  > ${InputGroup} {
     @media (max-width: 1024px) {
       grid-column: span 12;
     }
   }
 `
 
-export const InputGroup = styled.div<{ $cols?: number }>`
-  display: flex;
-  flex-direction: column;
-  grid-column: span ${(props) => (props.$cols ? props.$cols : 12)};
-  position: relative;
-`
-
-export const InputControl = styled.input`
-  background-color: ${(props) => props.theme['gray-200']};
-  font-size: 0.875rem;
-  padding: 0.75rem;
-  border: 1px solid ${(props) => props.theme['gray-300']};
-  border-radius: 4px;
-
-  & + span {
-    position: absolute;
-    top: 0;
-    right: 0.75rem;
-    color: ${(props) => props.theme['gray-500']};
-    font-size: 0.75rem;
-    font-style: italic;
-    transform: translateY(100%);
-  }
-
-  &::placeholder {
-    color: ${(props) => props.theme['gray-500']};
-    font-size: 0.875rem;
-    font-weight: 400;
-  }
-
-  &:hover,
-  &:focus {
-    border-color: ${(props) => props.theme['yellow-800']};
-    transition: border-color 300ms;
-
-    &::placeholder {
-      color: ${(props) => props.theme['gray-700']};
-    }
-
-    & + span {
-      width: 1px;
-      height: 1px;
-      position: absolute;
-      padding: 0;
-      margin: -1px;
-      border-width: 0;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      overflow: hidden;
-    }
-  }
-
-  &:-webkit-autofill,
-  &:-webkit-autofill:hover,
-  &:-webkit-autofill:focus {
-    -webkit-text-fill-color: ${(props) => props.theme['gray-700']};
-    -webkit-box-shadow: 0 0 0 40rem ${(props) => props.theme['gray-200']} inset;
-  }
-`
-
-export const InputError = styled.div`
-  color: ${(props) => props.theme['yellow-800']};
-  font-size: 0.75rem;
-  font-weight: 700;
-  margin-top: 0.5rem;
-`
-
-export const CheckGroup = styled(InputGroup)`
-  grid-column: auto;
-`
-
-export const CheckLabel = styled.label`
-  display: flex;
-  align-items: center;
-  column-gap: 0.75rem;
-  background-color: ${(props) => props.theme['gray-300']};
-  color: ${(props) => props.theme['gray-700']};
-  font-size: 0.75rem;
-  font-weight: 400;
-  line-height: 1.6;
-  text-transform: uppercase;
-  padding: 1rem;
-  border: 1px solid transparent;
-  border-radius: 6px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${(props) => props.theme['gray-400']};
-    transition: background-color 300ms;
-  }
-
-  & > svg {
-    fill: ${(props) => props.theme['purple-700']};
-    margin-top: -2px;
-  }
-`
-
-export const CheckControl = styled.input`
-  position: absolute;
-  clip: rect(0, 0, 0, 0);
-  pointer-events: none;
-
-  &:checked + label,
-  &:focus + label {
-    background-color: ${(props) => props.theme['purple-300']};
-    border-color: ${(props) => props.theme['purple-700']};
-  }
-`
-
-export const PaymentMethods = styled(WrapperBase)`
+export const PaymentMethods = styled(RoundedBackground)`
   header {
     display: flex;
     column-gap: 0.625rem;
@@ -218,24 +111,26 @@ export const PaymentMethods = styled(WrapperBase)`
       line-height: 1.3;
     }
   }
+`
 
-  & > div {
+export const InputRadioError = styled(InputError)``
+
+export const PaymentMethodsFields = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  > ${RadioGroup} {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.75rem;
+  }
 
-    @media (max-width: 1024px) {
-      grid-template-columns: repeat(1, minmax(0, 1fr));
-    }
-
-    & > ${CheckGroup} {
-      display: grid;
-    }
-
-    & > ${InputError} {
-      grid-column: span 3;
-      margin-top: -0.25rem;
-    }
+  > ${InputRadioError} {
+    grid-column: span 3;
+    margin-top: -0.25rem;
   }
 `
 
@@ -261,7 +156,7 @@ export const Cart = styled.div`
   }
 `
 
-export const Order = styled(WrapperBase)`
+export const Order = styled(RoundedBackground)`
   border-radius: 6px 36px;
   row-gap: 0;
 `

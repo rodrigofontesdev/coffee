@@ -5,6 +5,8 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import * as z from 'zod'
 import { ButtonPrimary } from '../../components/ButtonPrimary'
+import { Input } from '../../components/Forms/Input'
+import { InputRadio } from '../../components/Forms/InputRadio'
 import { useCart } from '../../hooks/useCart'
 import { states } from '../../utils/data/states'
 import { format } from '../../utils/functions/formatter'
@@ -13,19 +15,15 @@ import { OrderTotal } from './components/OrderTotal'
 import { ProductCardSimple } from './components/ProductCardSimple'
 import {
   Address,
-  AddressFormFields,
+  AddressFields,
   Cart,
-  CheckControl,
-  CheckGroup,
-  CheckLabel,
   CheckoutForm,
   Container,
   Delivery,
-  InputControl,
-  InputError,
-  InputGroup,
+  InputRadioError,
   Order,
   PaymentMethods,
+  PaymentMethodsFields,
 } from './styles'
 
 const checkoutFormValidation = z.object({
@@ -54,6 +52,7 @@ export type CheckoutFormData = z.infer<typeof checkoutFormValidation>
 
 export function Checkout() {
   const { cart, cartTotalItems, createOrder, fee, subtotal, total } = useCart()
+  const navigate = useNavigate()
   const {
     handleSubmit,
     register,
@@ -72,7 +71,6 @@ export function Checkout() {
       state: '',
     },
   })
-  const navigate = useNavigate()
 
   function handleSubmitCheckoutForm(data: CheckoutFormData) {
     if (cartTotalItems < 1) {
@@ -116,67 +114,73 @@ export function Checkout() {
                 </div>
               </header>
 
-              <AddressFormFields>
-                <InputGroup $cols={5}>
-                  <InputControl
-                    type="tel"
-                    placeholder="CEP"
-                    {...register('zipcode', {
-                      onChange({ target }: ChangeEvent<HTMLInputElement>) {
-                        setValue('zipcode', format.zipcode(target.value))
-                      },
-                    })}
-                  />
+              <AddressFields>
+                <Input
+                  columns={5}
+                  type="tel"
+                  placeholder="CEP"
+                  error={errors.zipcode && errors.zipcode.message}
+                  {...register('zipcode', {
+                    onChange({ target }: ChangeEvent<HTMLInputElement>) {
+                      setValue('zipcode', format.zipcode(target.value))
+                    },
+                  })}
+                />
 
-                  {errors.zipcode && <InputError>{errors.zipcode.message}</InputError>}
-                </InputGroup>
+                <Input
+                  columns={12}
+                  type="text"
+                  placeholder="Rua"
+                  error={errors.street && errors.street.message}
+                  {...register('street')}
+                />
 
-                <InputGroup $cols={12}>
-                  <InputControl type="text" placeholder="Rua" {...register('street')} />
+                <Input
+                  columns={5}
+                  type="text"
+                  placeholder="Número"
+                  error={errors.streetNumber && errors.streetNumber.message}
+                  {...register('streetNumber')}
+                />
 
-                  {errors.street && <InputError>{errors.street.message}</InputError>}
-                </InputGroup>
+                <Input
+                  columns={7}
+                  type="text"
+                  placeholder="Complemento"
+                  optional
+                  error={errors.complement && errors.complement.message}
+                  {...register('complement')}
+                />
 
-                <InputGroup $cols={5}>
-                  <InputControl type="text" placeholder="Número" {...register('streetNumber')} />
+                <Input
+                  columns={5}
+                  type="text"
+                  placeholder="Bairro"
+                  error={errors.neighborhood && errors.neighborhood.message}
+                  {...register('neighborhood')}
+                />
 
-                  {errors.streetNumber && <InputError>{errors.streetNumber.message}</InputError>}
-                </InputGroup>
+                <Input
+                  columns={5}
+                  type="text"
+                  placeholder="Cidade"
+                  error={errors.city && errors.city.message}
+                  {...register('city')}
+                />
 
-                <InputGroup $cols={7}>
-                  <InputControl type="text" placeholder="Complemento" {...register('complement')} />
-                  <span>Opcional</span>
-
-                  {errors.complement && <InputError>{errors.complement.message}</InputError>}
-                </InputGroup>
-
-                <InputGroup $cols={5}>
-                  <InputControl type="text" placeholder="Bairro" {...register('neighborhood')} />
-
-                  {errors.neighborhood && <InputError>{errors.neighborhood.message}</InputError>}
-                </InputGroup>
-
-                <InputGroup $cols={5}>
-                  <InputControl type="text" placeholder="Cidade" {...register('city')} />
-
-                  {errors.city && <InputError>{errors.city.message}</InputError>}
-                </InputGroup>
-
-                <InputGroup $cols={2}>
-                  <InputControl
-                    type="text"
-                    placeholder="UF"
-                    maxLength={2}
-                    {...register('state', {
-                      onChange({ target }: ChangeEvent<HTMLInputElement>) {
-                        setValue('state', target.value.toUpperCase(), { shouldValidate: true })
-                      },
-                    })}
-                  />
-
-                  {errors.state && <InputError>{errors.state.message}</InputError>}
-                </InputGroup>
-              </AddressFormFields>
+                <Input
+                  columns={2}
+                  type="text"
+                  placeholder="UF"
+                  maxLength={2}
+                  error={errors.state && errors.state.message}
+                  {...register('state', {
+                    onChange({ target }: ChangeEvent<HTMLInputElement>) {
+                      setValue('state', target.value.toUpperCase(), { shouldValidate: true })
+                    },
+                  })}
+                />
+              </AddressFields>
             </Address>
 
             <PaymentMethods>
@@ -189,48 +193,30 @@ export function Checkout() {
                 </div>
               </header>
 
-              <div>
-                <CheckGroup>
-                  <CheckControl
-                    type="radio"
-                    id="creditCard"
-                    defaultValue="creditCard"
-                    {...register('paymentMethod')}
-                  />
-                  <CheckLabel htmlFor="creditCard">
-                    <CreditCard size={16} />
-                    Cartão de crédito
-                  </CheckLabel>
-                </CheckGroup>
+              <PaymentMethodsFields>
+                <InputRadio
+                  id="creditCard"
+                  defaultValue="creditCard"
+                  {...register('paymentMethod')}
+                >
+                  <CreditCard size={16} />
+                  Cartão de crédito
+                </InputRadio>
 
-                <CheckGroup>
-                  <CheckControl
-                    type="radio"
-                    id="debitCard"
-                    defaultValue="debitCard"
-                    {...register('paymentMethod')}
-                  />
-                  <CheckLabel htmlFor="debitCard">
-                    <Bank size={16} />
-                    Cartão de débito
-                  </CheckLabel>
-                </CheckGroup>
+                <InputRadio id="debitCard" defaultValue="debitCard" {...register('paymentMethod')}>
+                  <Bank size={16} />
+                  Cartão de débito
+                </InputRadio>
 
-                <CheckGroup>
-                  <CheckControl
-                    type="radio"
-                    id="cash"
-                    defaultValue="cash"
-                    {...register('paymentMethod')}
-                  />
-                  <CheckLabel htmlFor="cash">
-                    <Money size={16} />
-                    Dinheiro
-                  </CheckLabel>
-                </CheckGroup>
+                <InputRadio id="cash" defaultValue="cash" {...register('paymentMethod')}>
+                  <Money size={16} />
+                  Dinheiro
+                </InputRadio>
 
-                {errors.paymentMethod && <InputError>{errors.paymentMethod.message}</InputError>}
-              </div>
+                {errors.paymentMethod && (
+                  <InputRadioError>{errors.paymentMethod.message}</InputRadioError>
+                )}
+              </PaymentMethodsFields>
             </PaymentMethods>
           </Delivery>
 
