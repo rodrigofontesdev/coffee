@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useState } from 'react'
+import { ReactNode, createContext, useEffect, useState } from 'react'
 import { CheckoutFormData } from '../pages/Checkout'
 import { ProductProps } from '../utils/data/products'
 
@@ -83,6 +83,12 @@ export function CartProvider({ children }: CartProviderProps) {
     setOrder(data)
     setCart([])
   }
+
+  useEffect(() => {
+    const stateJSON = JSON.stringify(cart)
+
+    localStorage.setItem('@coffee-delivery:cart-state-1.0.0', stateJSON)
+  }, [cart])
 
   const cartTotalItems = cart.length
   const fee = cartTotalItems > 0 ? 3.5 : 0
