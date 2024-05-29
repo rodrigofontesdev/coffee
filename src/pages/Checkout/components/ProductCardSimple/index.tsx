@@ -52,7 +52,7 @@ export function ProductCardSimple({ product }: ProductCardSimpleProps) {
             decrementQuantity={handleDecrementQuantity}
           />
 
-          <ButtonSecondary onClick={handleRemoveProductFromCart}>
+          <ButtonSecondary type="button" onClick={handleRemoveProductFromCart}>
             <Trash size={16} />
             Remover
           </ButtonSecondary>
