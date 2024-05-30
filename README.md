@@ -2,8 +2,9 @@
 
 # Coffee Delivery
 
-> [!IMPORTANT]
-> TODO
+A online coffee shop to buy and receive your coffee wherever you are, at any time.
+
+The purpose of the project is to go even deeper into React features, to practice using ReactJS even more.
 
 # Prerequisites
 
@@ -29,8 +30,20 @@
 
 # I've Learned
 
-> [!IMPORTANT]
-> TODO
+- Create components
+- Share data between components (`props`)
+- Render lists (lists and `key`)
+- Retain data between renders (`useState()`)
+- Immutability (and how to not break it!)
+- CSS-in-JS styling technique with Styled Components
+- How to make routes with React Router DOM
+- Controlled and uncontrolled components
+- Form validation with React Hook Form and Zod
+- Store data in user's browser with localStorage
+- Perform side effects in components (`useEffect()`)
+- Share data between components and avoid prop drilling (`Context API`)
+- Build your own hooks
+- Manage complex states (`useReducer()`)
 
 # Built With
 
