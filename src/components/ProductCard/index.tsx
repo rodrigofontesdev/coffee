@@ -39,6 +39,7 @@ export function ProductCard({ product }: ProductCardProps) {
       price,
       quantity,
     })
+    setQuantity(1)
 
     toast.success('Produto adicionado no carrinho.')
   }
