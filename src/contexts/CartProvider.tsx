@@ -49,7 +49,7 @@ export const CartContext = createContext({} as CartContextProps)
 
 export function CartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<CartItemProps[]>(() => {
-    const storedStateAsJson = localStorage.getItem('@coffee-delivery:cart-state-1.0.0')
+    const storedStateAsJson = localStorage.getItem('@coffee-delivery:cart-1.0.0')
 
     if (storedStateAsJson) {
       return JSON.parse(storedStateAsJson)
@@ -95,7 +95,7 @@ export function CartProvider({ children }: CartProviderProps) {
   useEffect(() => {
     const cartStateToJson = JSON.stringify(cart)
 
-    localStorage.setItem('@coffee-delivery:cart-state-1.0.0', cartStateToJson)
+    localStorage.setItem('@coffee-delivery:cart-1.0.0', cartStateToJson)
   }, [cart])
 
   const cartTotalItems = cart.length
